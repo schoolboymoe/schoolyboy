@@ -1,14 +1,188 @@
-.inspiration-badge {
-  background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-  color: #c9a44a;
-  font-size: 11px;
-  padding: 5px 10px;
-  border-radius: 999px;
+/* ==========================================================================
+   Nova Scents — Luxury Polish Layer
+   --------------------------------------------------------------------------
+   Loaded LAST in theme.liquid so it overrides the compiled theme.css without
+   touching the theme core. Everything here is additive and reversible:
+   remove the <link> in layout/theme.liquid (or delete this file) to revert.
+
+   Design intent: luxurious but simple. Clean white canvas, deep ink type,
+   a single warm-gold accent, generous rhythm, and quiet micro-interactions.
+   ========================================================================== */
+
+:root {
+  /* Warm gold accent — the single signature color for the brand. */
+  --accent-gold: #b8893b;
+  --accent-gold-soft: #c9a44a;
+  --accent-gold-tint: rgba(184, 137, 59, 0.12);
+
+  /* Refined motion + elevation primitives. */
+  --lux-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --lux-fast: 180ms;
+  --lux-slow: 520ms;
+  --lux-shadow-sm: 0 1px 2px rgba(20, 18, 14, 0.05), 0 4px 14px rgba(20, 18, 14, 0.06);
+  --lux-shadow-lg: 0 10px 30px rgba(20, 18, 14, 0.12), 0 2px 8px rgba(20, 18, 14, 0.08);
+
+  /* Re-point the theme's accent tokens toward gold for cohesion.
+     Primary buttons stay near-black (set in theme settings) for contrast. */
+  --colors-icon-rating: var(--accent-gold) !important;
+  --colors-text-link: var(--accent-gold) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Typography — crisper rendering and a more considered headline rhythm.
+   -------------------------------------------------------------------------- */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, .h1, .h2, .h3 {
+  text-wrap: balance;            /* avoids lonely last words in headings */
+  letter-spacing: -0.01em;
+}
+
+/* Small all-caps "eyebrow" labels read as editorial / premium. */
+.lux-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  border: 1px solid rgba(201, 164, 74, 0.35);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  color: var(--accent-gold);
+}
+
+/* Cap line length on long-form copy for comfortable reading. */
+.rte p,
+.prose p {
+  max-width: 72ch;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons — quiet, tactile micro-interaction. Applies to the theme's
+   `.button` system without changing color (keeps the configured palette).
+   -------------------------------------------------------------------------- */
+.button {
+  transition: transform var(--lux-fast) var(--lux-ease),
+              box-shadow var(--lux-fast) var(--lux-ease),
+              background-color var(--lux-fast) var(--lux-ease),
+              color var(--lux-fast) var(--lux-ease) !important;
+  will-change: transform;
+}
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--lux-shadow-sm);
+}
+.button:active {
+  transform: translateY(0);
+}
+
+/* Optional gold CTA utility — use sparingly on hero / key conversion points.
+   Gold field with deep-ink text keeps contrast accessible (~6:1). */
+.button-gold,
+.button.button-gold {
+  background-color: var(--accent-gold) !important;
+  border-color: var(--accent-gold) !important;
+  color: #1a160f !important;
+}
+.button-gold:hover,
+.button.button-gold:hover {
+  background-color: var(--accent-gold-soft) !important;
+  border-color: var(--accent-gold-soft) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Product cards — gentle image bloom + lift on hover. Targets the theme's
+   card-media containers conservatively.
+   -------------------------------------------------------------------------- */
+.card-product img,
+.product-card img,
+.card__media img {
+  transition: transform var(--lux-slow) var(--lux-ease) !important;
+  will-change: transform;
+}
+.card-product:hover img,
+.product-card:hover img,
+.card__media:hover img {
+  transform: scale(1.045);
+}
+
+/* --------------------------------------------------------------------------
+   Accessibility — visible keyboard focus the theme doesn't provide.
+   -------------------------------------------------------------------------- */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible,
+.button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent-gold) !important;
+  outline-offset: 2px !important;
+  border-radius: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Header — subtle elevation once the page is scrolled (toggled by custom.js).
+   -------------------------------------------------------------------------- */
+.header-scrolled .section-header,
+.header-scrolled #shopify-section-header {
+  box-shadow: var(--lux-shadow-sm);
+  transition: box-shadow var(--lux-slow) var(--lux-ease);
+}
+
+/* --------------------------------------------------------------------------
+   Scroll reveal — elements with [data-reveal] fade/rise into view once.
+   custom.js adds .is-revealed via IntersectionObserver.
+   -------------------------------------------------------------------------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--lux-slow) var(--lux-ease),
+              transform var(--lux-slow) var(--lux-ease);
+}
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+[data-reveal][data-reveal-delay="1"] { transition-delay: 90ms; }
+[data-reveal][data-reveal-delay="2"] { transition-delay: 180ms; }
+[data-reveal][data-reveal-delay="3"] { transition-delay: 270ms; }
+
+/* --------------------------------------------------------------------------
+   "Inspired by" badge — refined from the original orphaned style and now
+   actually loaded. Used for inspired-by fragrance positioning.
+   -------------------------------------------------------------------------- */
+.inspiration-badge {
   display: inline-flex;
   align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+  color: var(--accent-gold-soft);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(201, 164, 74, 0.35);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* --------------------------------------------------------------------------
+   Respect users who ask for less motion. The base theme has no such guard.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

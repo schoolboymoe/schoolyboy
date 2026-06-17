@@ -1,0 +1,285 @@
+{%- comment -%}
+  Nova Scents — Luxury Animated Hero
+  ----------------------------------------------------------------------------
+  Self-contained, opt-in hero section. Add it from the theme editor
+  (Add section → Luxury hero). Nothing else in the theme depends on it, so it
+  is safe to add, remove, or reorder. All styles are scoped to this instance
+  via `#lux-hero-{{ section.id }}` and all motion respects reduced-motion.
+
+  Animation: slow Ken Burns zoom on the image, a one-pass gold light sweep,
+  and a staggered fade-up reveal of the copy.
+{%- endcomment -%}
+
+{%- liquid
+  assign s = section.settings
+  assign uid = section.id
+  case s.height
+    when 'small'  then assign min_h = '58vh'
+    when 'medium' then assign min_h = '74vh'
+    when 'large'  then assign min_h = '88vh'
+    else assign min_h = '100vh'
+  endcase
+  assign align = s.text_alignment | default: 'center'
+-%}
+
+{%- style -%}
+  #lux-hero-{{ uid }} {
+    position: relative;
+    min-height: {{ min_h }};
+    display: flex;
+    align-items: {% if s.vertical_position == 'top' %}flex-start{% elsif s.vertical_position == 'bottom' %}flex-end{% else %}center{% endif %};
+    overflow: hidden;
+    background-color: #0e0c0a;
+    isolation: isolate;
+  }
+  #lux-hero-{{ uid }} .lux-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  #lux-hero-{{ uid }} .lux-hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: {{ s.focal_point | default: 'center' }};
+    display: block;
+    transform: scale(1.08);
+    animation: luxKenBurns-{{ uid }} 18s var(--lux-ease, ease-out) forwards;
+  }
+  #lux-hero-{{ uid }} .lux-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(to top, rgba(8,7,5,{{ s.overlay_opacity | divided_by: 100.0 }}) 0%, rgba(8,7,5,{{ s.overlay_opacity | times: 0.45 | divided_by: 100.0 }}) 55%, rgba(8,7,5,{{ s.overlay_opacity | times: 0.25 | divided_by: 100.0 }}) 100%);
+  }
+  /* One-pass diagonal gold light sweep. */
+  #lux-hero-{{ uid }} .lux-hero__sweep {
+    position: absolute;
+    inset: -20%;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(115deg, transparent 38%, rgba(201,164,74,0.16) 50%, transparent 62%);
+    transform: translateX(-120%);
+    animation: luxSweep-{{ uid }} 2.6s var(--lux-ease, ease-out) 0.5s 1;
+  }
+  #lux-hero-{{ uid }} .lux-hero__inner {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 6rem) clamp(1.25rem, 5vw, 4rem);
+    text-align: {{ align }};
+    color: #fff;
+  }
+  #lux-hero-{{ uid }} .lux-hero__content {
+    max-width: {% if align == 'center' %}48rem; margin-inline: auto{% else %}40rem{% endif %};
+  }
+  #lux-hero-{{ uid }} .lux-hero__eyebrow {
+    display: inline-block;
+    margin: 0 0 1rem;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #d9b96a;
+  }
+  #lux-hero-{{ uid }} .lux-hero__heading {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(2.4rem, 6vw, 4.75rem);
+    line-height: 1.04;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  #lux-hero-{{ uid }} .lux-hero__heading .lux-hl {
+    background: linear-gradient(90deg, #e7c878, #b8893b 55%, #e7c878);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: italic;
+  }
+  #lux-hero-{{ uid }} .lux-hero__text {
+    margin: 1.15rem auto 0;
+    max-width: 40rem;
+    font-size: clamp(1rem, 1.4vw, 1.18rem);
+    line-height: 1.6;
+    color: rgba(255,255,255,0.86);
+  }
+  {% if align != 'center' %}#lux-hero-{{ uid }} .lux-hero__text { margin-inline: 0; }{% endif %}
+  #lux-hero-{{ uid }} .lux-hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 2rem;
+    justify-content: {% if align == 'center' %}center{% elsif align == 'right' %}flex-end{% else %}flex-start{% endif %};
+  }
+  #lux-hero-{{ uid }} .lux-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.95rem 2rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: transform 180ms var(--lux-ease, ease), box-shadow 180ms var(--lux-ease, ease), background-color 180ms var(--lux-ease, ease);
+  }
+  #lux-hero-{{ uid }} .lux-btn:hover { transform: translateY(-2px); }
+  #lux-hero-{{ uid }} .lux-btn--gold {
+    background: linear-gradient(135deg, #c9a44a, #b8893b);
+    color: #17130c;
+    box-shadow: 0 8px 24px rgba(184,137,59,0.32);
+  }
+  #lux-hero-{{ uid }} .lux-btn--gold:hover { box-shadow: 0 12px 30px rgba(184,137,59,0.42); }
+  #lux-hero-{{ uid }} .lux-btn--ghost {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.55);
+  }
+  #lux-hero-{{ uid }} .lux-btn--ghost:hover { background: rgba(255,255,255,0.10); border-color: #fff; }
+
+  /* Staggered reveal of the copy. */
+  #lux-hero-{{ uid }} [data-anim] {
+    opacity: 0;
+    transform: translateY(22px);
+    animation: luxRise-{{ uid }} 0.9s var(--lux-ease, ease-out) forwards;
+  }
+  #lux-hero-{{ uid }} [data-anim="1"] { animation-delay: 0.15s; }
+  #lux-hero-{{ uid }} [data-anim="2"] { animation-delay: 0.32s; }
+  #lux-hero-{{ uid }} [data-anim="3"] { animation-delay: 0.49s; }
+  #lux-hero-{{ uid }} [data-anim="4"] { animation-delay: 0.66s; }
+
+  @keyframes luxKenBurns-{{ uid }} {
+    from { transform: scale(1.08); }
+    to   { transform: scale(1.0); }
+  }
+  @keyframes luxSweep-{{ uid }} {
+    from { transform: translateX(-120%); }
+    to   { transform: translateX(120%); }
+  }
+  @keyframes luxRise-{{ uid }} {
+    to { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #lux-hero-{{ uid }} .lux-hero__media img,
+    #lux-hero-{{ uid }} .lux-hero__sweep,
+    #lux-hero-{{ uid }} [data-anim] {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+{%- endstyle -%}
+
+<section id="lux-hero-{{ uid }}" class="lux-hero" aria-label="{{ s.heading | default: 'Featured' | escape }}">
+  <div class="lux-hero__media">
+    {%- if s.image != blank -%}
+      {{ s.image | image_url: width: 2400 | image_tag:
+        loading: 'eager',
+        fetchpriority: 'high',
+        sizes: '100vw',
+        widths: '600, 900, 1200, 1600, 2000, 2400',
+        alt: s.heading | default: shop.name | escape }}
+    {%- else -%}
+      <div style="position:absolute;inset:0;background:radial-gradient(120% 120% at 50% 0%, #2a2216 0%, #0e0c0a 70%);"></div>
+    {%- endif -%}
+  </div>
+
+  <div class="lux-hero__overlay"></div>
+  {%- if s.enable_sweep -%}<div class="lux-hero__sweep"></div>{%- endif -%}
+
+  <div class="lux-hero__inner">
+    <div class="lux-hero__content">
+      {%- if s.eyebrow != blank -%}
+        <span class="lux-hero__eyebrow" data-anim="1">{{ s.eyebrow | escape }}</span>
+      {%- endif -%}
+
+      {%- if s.heading != blank -%}
+        <h2 class="lux-hero__heading" data-anim="2">
+          {{ s.heading }}{% if s.heading_highlight != blank %} <span class="lux-hl">{{ s.heading_highlight }}</span>{% endif %}
+        </h2>
+      {%- endif -%}
+
+      {%- if s.text != blank -%}
+        <p class="lux-hero__text" data-anim="3">{{ s.text }}</p>
+      {%- endif -%}
+
+      {%- if s.button_label != blank or s.button_label_2 != blank -%}
+        <div class="lux-hero__cta" data-anim="4">
+          {%- if s.button_label != blank -%}
+            <a class="lux-btn lux-btn--gold" href="{{ s.button_link | default: '#' }}">{{ s.button_label | escape }}</a>
+          {%- endif -%}
+          {%- if s.button_label_2 != blank -%}
+            <a class="lux-btn lux-btn--ghost" href="{{ s.button_link_2 | default: '#' }}">{{ s.button_label_2 | escape }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Luxury hero",
+  "tag": "section",
+  "class": "lux-hero-section",
+  "settings": [
+    { "type": "header", "content": "Media" },
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    {
+      "type": "select", "id": "focal_point", "label": "Image focal point", "default": "center",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" },
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    { "type": "range", "id": "overlay_opacity", "label": "Overlay darkness", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 55 },
+    { "type": "checkbox", "id": "enable_sweep", "label": "Gold light sweep animation", "default": true },
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Inspired by the icons" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Fragrance, reimagined" },
+    { "type": "text", "id": "heading_highlight", "label": "Highlighted word (gold italic)", "default": "reimagined" },
+    { "type": "textarea", "id": "text", "label": "Subheading", "default": "Luxury-grade scents that last — without the luxury markup." },
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "button_label", "label": "Primary button label", "default": "Shop the collection" },
+    { "type": "url", "id": "button_link", "label": "Primary button link" },
+    { "type": "text", "id": "button_label_2", "label": "Secondary button label", "default": "Find your scent" },
+    { "type": "url", "id": "button_link_2", "label": "Secondary button link" },
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select", "id": "height", "label": "Section height", "default": "large",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" },
+        { "value": "full", "label": "Full screen" }
+      ]
+    },
+    {
+      "type": "select", "id": "text_alignment", "label": "Text alignment", "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select", "id": "vertical_position", "label": "Vertical position", "default": "center",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "bottom", "label": "Bottom" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Luxury hero" }]
+}
+{% endschema %}

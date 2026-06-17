@@ -97,6 +97,9 @@
     {{ content_for_header }}
     {{ settings.additional_head }}
 
+    {%- comment -%} Nova Scents luxury polish layer — loaded last so it overrides theme.css {%- endcomment -%}
+    {{ 'custom.css' | asset_url | stylesheet_tag }}
+
     {% liquid
       assign menu_font_400 = settings.type_menu_font | font_modify: 'weight', '400'
     %}
@@ -259,6 +262,7 @@
         <script src="{{ 'cart-countdown-timer.js' | asset_url }}" defer></script>
       {%- endif -%}
       <script src="{{ 'theme.js' | asset_url }}" defer></script>
+      <script src="{{ 'custom.js' | asset_url }}" defer></script>
       <script src="{{ 'vendors.js' | asset_url }}" defer></script>
       <script src="{{ 'variant-select-card.js' | asset_url }}" defer></script>
       <script>
