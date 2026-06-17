@@ -13,11 +13,14 @@
 {%- liquid
   assign s = section.settings
   assign uid = section.id
+  assign min_h = '100vh'
   case s.height
-    when 'small'  then assign min_h = '58vh'
-    when 'medium' then assign min_h = '74vh'
-    when 'large'  then assign min_h = '88vh'
-    else assign min_h = '100vh'
+    when 'small'
+      assign min_h = '58vh'
+    when 'medium'
+      assign min_h = '74vh'
+    when 'large'
+      assign min_h = '88vh'
   endcase
   assign align = s.text_alignment | default: 'center'
 -%}
