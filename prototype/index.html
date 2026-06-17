@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NOVA Scents · Extrait de Parfum, Made in the North</title>
+<meta name="description" content="Lyxiga doftparfymer inspirerade av ikonerna. 50 ml Extrait de Parfum, tillverkad i Norden. Fri frakt, Klarna, leverans 1-3 arbetsdagar.">
+<!-- Prototype loads fonts from Google Fonts. In the Shopify port these are self-hosted via the theme font system. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<!-- Announcement -->
+<div class="announce">
+  <div class="announce__track">
+    <span><b>Fri frakt</b> över 599 kr</span><span>Leverans <b>1-3 arbetsdagar</b></span><span>Betala med <b>Klarna</b></span><span>3 för 2 på hela sortimentet</span>
+    <span><b>Fri frakt</b> över 599 kr</span><span>Leverans <b>1-3 arbetsdagar</b></span><span>Betala med <b>Klarna</b></span><span>3 för 2 på hela sortimentet</span>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header" id="header">
+  <div class="wrap header__bar">
+    <button class="burger icon-btn" id="burger" aria-label="Meny">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <a class="brand" href="index.html">NOVA</a>
+    <nav class="nav" aria-label="Huvudmeny">
+      <a href="index.html" class="is-active">Hem</a>
+      <a href="#bestsellers">Parfymer</a>
+      <a href="#bundle">3 för 2</a>
+      <a href="#story">Om oss</a>
+      <a href="product.html">Doftguide</a>
+    </nav>
+    <div class="header__actions">
+      <button class="icon-btn show-lg" aria-label="Sök">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+      </button>
+      <button class="icon-btn cart-btn" id="cartOpen" aria-label="Varukorg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+        <span class="cart-count">2</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__grain"></div>
+  <div class="hero__sweep"></div>
+  <div class="wrap hero__inner">
+    <span class="eyebrow" data-reveal>Inspirerad av ikonerna</span>
+    <h1 class="hero__mark d1" data-reveal>NOVA</h1>
+    <span class="hero__sub d1" data-reveal>Extrait de Parfum · Made in the North</span>
+    <p class="hero__line d2" data-reveal>Lyxen i doften. Inte i priset.</p>
+    <div class="hero__cta d3" data-reveal>
+      <a href="#bestsellers" class="btn btn--gold">Handla parfymer</a>
+      <a href="product.html" class="btn btn--ghost">Hitta din doft</a>
+    </div>
+  </div>
+</section>
+
+<!-- Trust -->
+<section class="trust">
+  <div class="wrap"><div class="trust__grid">
+    <div class="trust__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 13h13l3-5H6"/><circle cx="8" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg>Fri frakt över 599 kr</div>
+    <div class="trust__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>Betala med Klarna</div>
+    <div class="trust__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Leverans 1-3 dagar</div>
+    <div class="trust__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="m12 3 2.5 5 5.5.8-4 3.9 1 5.5L12 21l-5-2.8 1-5.5-4-3.9 5.5-.8L12 3Z"/></svg>4.8 av 5 · 2 400 omdömen</div>
+  </div></div>
+</section>
+
+<!-- Bestsellers -->
+<section class="section" id="bestsellers">
+  <div class="wrap">
+    <div class="shead" data-reveal>
+      <h2 class="h-xl">Mest älskade dofter</h2>
+      <p>Åtta signaturdofter, gjutna som rena Extrait de Parfum för djup och hållbarhet hela dagen.</p>
+    </div>
+    <div class="pgrid">
+      <!-- TODO: replace .card__ph with real product photo <img src="..."> -->
+      <article class="card" data-reveal>
+        <div class="card__media">
+          <span class="card__badge">Bästsäljare</span>
+          <div class="card__ph">PACIFICO<small>50 ML EXTRAIT</small></div>
+          <div class="card__quick"><a href="product.html" class="btn btn--gold btn--block">Lägg i varukorg</a></div>
+        </div>
+        <div class="card__info">
+          <h3 class="card__title">Pacifico</h3>
+          <p class="card__notes">Citrus · Aromatisk · Frisk</p>
+          <div class="card__row"><span class="stars">★★★★★</span><span class="card__price">399 kr</span></div>
+        </div>
+      </article>
+      <article class="card d1" data-reveal>
+        <div class="card__media">
+          <span class="card__badge">Rökig</span>
+          <div class="card__ph">OUD CHAOS<small>50 ML EXTRAIT</small></div>
+          <div class="card__quick"><a href="product.html" class="btn btn--gold btn--block">Lägg i varukorg</a></div>
+        </div>
+        <div class="card__info">
+          <h3 class="card__title">Oud Chaos</h3>
+          <p class="card__notes">Oud · Läder · Krydda</p>
+          <div class="card__row"><span class="stars">★★★★★</span><span class="card__price">429 kr</span></div>
+        </div>
+      </article>
+      <article class="card d2" data-reveal>
+        <div class="card__media">
+          <div class="card__ph">BLUE STALLION<small>50 ML EXTRAIT</small></div>
+          <div class="card__quick"><a href="product.html" class="btn btn--gold btn--block">Lägg i varukorg</a></div>
+        </div>
+        <div class="card__info">
+          <h3 class="card__title">Blue Stallion</h3>
+          <p class="card__notes">Akvatisk · Ambra · Modig</p>
+          <div class="card__row"><span class="stars">★★★★☆</span><span class="card__price">399 kr</span></div>
+        </div>
+      </article>
+      <article class="card d3" data-reveal>
+        <div class="card__media">
+          <span class="card__badge">Nyhet</span>
+          <div class="card__ph">PURPLE NIGHTS<small>50 ML EXTRAIT</small></div>
+          <div class="card__quick"><a href="product.html" class="btn btn--gold btn--block">Lägg i varukorg</a></div>
+        </div>
+        <div class="card__info">
+          <h3 class="card__title">Purple Nights</h3>
+          <p class="card__notes">Söt · Vanilj · Sensuell</p>
+          <div class="card__row"><span class="stars">★★★★★</span><span class="card__price">429 kr</span></div>
+        </div>
+      </article>
+    </div>
+    <div style="text-align:center; margin-top:3rem;" data-reveal>
+      <a href="#" class="btn btn--ghost">Se alla parfymer</a>
+    </div>
+  </div>
+</section>
+
+<!-- Story / inspired-by -->
+<section class="section" id="story" style="background:var(--bg-1); border-block:1px solid var(--line);">
+  <div class="wrap split">
+    <div class="split__media" data-reveal>
+      <!-- TODO: brand/lifestyle photo, ~1200x1500 -->
+      <img src="https://picsum.photos/seed/nova-noir-bottle/1000/1250" alt="Nova Scents flaska i dramatiskt ljus">
+    </div>
+    <div class="split__body d1" data-reveal>
+      <span class="eyebrow">Filosofin</span>
+      <h2 class="h-lg" style="margin-top:1rem;">Samma själ som de stora husen. Utan lyxpåslaget.</h2>
+      <p>Vi studerar de mest ikoniska dofterna och återskapar deras karaktär i ren Extrait de Parfum, gjuten i Norden med 25 till 30 procent parfymolja.</p>
+      <p>Resultatet är en doft som sitter kvar i timmar, i en flaska du faktiskt har råd att tömma.</p>
+      <a href="#bestsellers" class="btn btn--gold">Upptäck doftbiblioteket</a>
+    </div>
+  </div>
+</section>
+
+<!-- Bundle band -->
+<section class="section bundle" id="bundle">
+  <div class="wrap" data-reveal>
+    <span class="hero__sub" style="margin:0; color:var(--gold);">Mix &amp; Match</span>
+    <h2 class="display" style="font-size:clamp(2.6rem,7vw,5rem);">Köp 3, betala för 2</h2>
+    <p>Bygg ditt eget doftgarderob. Den billigaste av tre parfymer bjuder vi på, automatiskt i kassan.</p>
+    <a href="#bestsellers" class="btn btn--gold">Bygg ditt set</a>
+  </div>
+</section>
+
+<!-- Scent finder -->
+<section class="section">
+  <div class="wrap">
+    <div class="shead" data-reveal>
+      <h2 class="h-xl">Hitta din karaktär</h2>
+      <p>Välj en stämning, så guidar vi dig till doften som matchar.</p>
+    </div>
+    <div class="bento">
+      <a class="tile" href="#bestsellers" data-reveal><div class="tile__glow"></div><div><span>Kväll</span><h3>Oud &amp; Läder</h3></div></a>
+      <a class="tile d1" href="#bestsellers" data-reveal><div class="tile__glow"></div><div><span>Sensuell</span><h3>Söt &amp; Vanilj</h3></div></a>
+      <a class="tile d2" href="#bestsellers" data-reveal><div class="tile__glow"></div><div><span>Frisk</span><h3>Citrus &amp; Hav</h3></div></a>
+      <a class="tile d1" href="#bestsellers" data-reveal><div class="tile__glow"></div><div><span>Vardag</span><h3>Aromatisk</h3></div></a>
+      <a class="tile d2" href="#bestsellers" data-reveal><div class="tile__glow"></div><div><span>Värme</span><h3>Ambra &amp; Krydda</h3></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="section" style="background:var(--bg-1); border-block:1px solid var(--line);">
+  <div class="wrap">
+    <div class="shead" data-reveal><h2 class="h-xl">Vad doftälskarna säger</h2><p>Över 2 400 verifierade omdömen, snittbetyg 4.8 av 5.</p></div>
+    <div class="reviews">
+      <figure class="quote" data-reveal><div class="stars">★★★★★</div><p>"Pacifico håller hela arbetsdagen och får alltid komplimanger. Galet bra för priset."</p><cite>Elin H. · Verifierat köp</cite></figure>
+      <figure class="quote d1" data-reveal><div class="stars">★★★★★</div><p>"Oud Chaos är min nya signaturdoft. Djup, varm och otroligt vuxen."</p><cite>Marcus L. · Verifierat köp</cite></figure>
+      <figure class="quote d2" data-reveal><div class="stars">★★★★★</div><p>"Beställde tre, betalade för två och leveransen kom på två dagar. Klockrent."</p><cite>Sara N. · Verifierat köp</cite></figure>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section class="section news">
+  <div class="wrap" data-reveal>
+    <h2 class="h-lg">Bli först med nya släpp</h2>
+    <p style="color:var(--muted); max-width:42ch; margin:1rem auto 0;">Få 10 procent på din första order och tidig tillgång till begränsade dofter.</p>
+    <form onsubmit="return false;">
+      <input class="field" type="email" placeholder="Din e-postadress" aria-label="E-post" required>
+      <button class="btn btn--gold" type="submit">Gå med</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="brand">NOVA</span>
+        <p>Extrait de Parfum, tillverkad i Norden. Lyxiga dofter inspirerade av ikonerna, utan lyxpåslaget.</p>
+      </div>
+      <div class="fcol"><h4>Handla</h4><a href="#bestsellers">Alla parfymer</a><a href="#bestsellers">Bästsäljare</a><a href="#bundle">3 för 2</a><a href="product.html">Doftguide</a></div>
+      <div class="fcol"><h4>Hjälp</h4><a href="#">Frakt &amp; leverans</a><a href="#">Returer</a><a href="#">Kontakt</a><a href="#">Vanliga frågor</a></div>
+      <div class="fcol"><h4>Nova Parfumes AB</h4><a href="#">Om oss</a><a href="mailto:info@novascents.se">info@novascents.se</a><a href="#">Göteborg, Sverige</a><a href="#">Org.nr 559491-4938</a></div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Nova Parfumes AB. Alla rättigheter förbehållna.</span>
+      <span class="pay">Trygg betalning med <b>Klarna</b> &amp; kort</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile nav -->
+<nav class="mnav" id="mnav" aria-label="Mobilmeny">
+  <a href="index.html">Hem</a><a href="#bestsellers">Parfymer</a><a href="#bundle">3 för 2</a><a href="#story">Om oss</a><a href="product.html">Doftguide</a>
+</nav>
+
+<!-- Cart drawer -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Varukorg">
+  <div class="drawer__head"><h3>Din varukorg</h3><button class="icon-btn" id="cartClose" aria-label="Stäng">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="drawer__body">
+    <div class="drawer__line"><div class="drawer__thumb">P</div><div><h4 style="font-family:var(--serif);font-size:1.1rem;">Pacifico</h4><p style="color:var(--muted-2);font-size:0.8rem;">50 ml · Antal 1</p><span style="color:var(--gold-soft);font-size:0.9rem;">399 kr</span></div></div>
+    <div class="drawer__line"><div class="drawer__thumb">O</div><div><h4 style="font-family:var(--serif);font-size:1.1rem;">Oud Chaos</h4><p style="color:var(--muted-2);font-size:0.8rem;">50 ml · Antal 1</p><span style="color:var(--gold-soft);font-size:0.9rem;">429 kr</span></div></div>
+  </div>
+  <div class="drawer__foot">
+    <div class="drawer__total"><span>Delsumma</span><b>828 kr</b></div>
+    <a href="#" class="btn btn--gold btn--block">Till kassan</a>
+  </div>
+</aside>
+
+<script src="assets/site.js" defer></script>
+</body>
+</html>

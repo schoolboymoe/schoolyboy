@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oud Chaos · 50 ml Extrait de Parfum · NOVA Scents</title>
+<meta name="description" content="Oud Chaos, en djup och rökig Extrait de Parfum. Oud, läder och krydda. 50 ml, tillverkad i Norden.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  /* Product-page-specific layout (will become sections/main-product in Shopify) */
+  .pdp { padding-top: clamp(2rem, 4vw, 3rem); }
+  .crumbs { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-2); margin-bottom: 2rem; }
+  .crumbs a:hover { color: var(--gold-soft); }
+  .pdp__grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(1.5rem, 4vw, 4rem); align-items: start; }
+  .gallery { position: sticky; top: 100px; }
+  .gallery__main { aspect-ratio: 4 / 5; border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--line);
+    background: radial-gradient(70% 60% at 55% 28%, #261d12, #0b0908); display: grid; place-items: center; position: relative; }
+  .gallery__main .card__ph { font-size: 3rem; }
+  .gallery__thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.7rem; margin-top: 0.7rem; }
+  .thumb { aspect-ratio: 1; border-radius: var(--r-sm); border: 1px solid var(--line); background: radial-gradient(70% 70% at 50% 30%, #221a11, #0b0908);
+    display: grid; place-items: center; font-family: var(--serif); color: var(--gold); cursor: pointer; transition: border-color var(--t-fast); }
+  .thumb.is-active, .thumb:hover { border-color: var(--gold); }
+
+  .pinfo__badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gold-soft); border: 1px solid var(--line-strong); background: #0e0c0a; padding: 5px 11px; border-radius: var(--r-pill); }
+  .pinfo h1 { font-size: clamp(2.4rem, 5vw, 3.4rem); margin: 1rem 0 0.5rem; }
+  .pinfo__notes { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .pinfo__rate { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.9rem; font-size: 0.8rem; color: var(--muted-2); }
+  .pinfo__price { font-family: var(--serif); font-size: 2.2rem; color: var(--gold-soft); margin: 1.4rem 0 0.4rem; }
+  .pinfo__klarna { font-size: 0.8rem; color: var(--muted-2); }
+  .pinfo__klarna b { color: var(--gold-soft); font-weight: 500; }
+  .pinfo__desc { color: var(--muted); margin: 1.6rem 0; max-width: 52ch; }
+
+  .sizes { display: flex; gap: 0.6rem; margin: 1.4rem 0; }
+  .size { border: 1px solid var(--line-strong); border-radius: var(--r-pill); padding: 0.7rem 1.3rem; font-size: 0.8rem;
+    letter-spacing: 0.08em; color: var(--cream); transition: border-color var(--t-fast), background var(--t-fast); }
+  .size.is-active { border-color: var(--gold); background: var(--gold-tint); color: var(--gold-soft); }
+
+  .buy { display: flex; gap: 0.8rem; align-items: stretch; margin: 1.4rem 0 1rem; }
+  .qty { display: flex; align-items: center; border: 1px solid var(--line-strong); border-radius: var(--r-pill); }
+  .qty button { width: 44px; height: 100%; color: var(--muted); font-size: 1.1rem; }
+  .qty button:hover { color: var(--gold-soft); }
+  .qty span { min-width: 30px; text-align: center; font-size: 0.95rem; }
+
+  .assure { display: grid; gap: 0.7rem; margin-top: 1.6rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
+  .assure div { display: flex; align-items: center; gap: 0.7rem; font-size: 0.85rem; color: var(--muted); }
+  .assure svg { width: 17px; height: 17px; color: var(--gold); flex: none; }
+
+  /* Scent pyramid */
+  .pyramid { margin-top: 1.2rem; display: grid; gap: 0; }
+  .pnote { display: grid; grid-template-columns: 120px 1fr; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .pnote:last-child { border-bottom: none; }
+  .pnote dt { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+  .pnote dd { font-family: var(--serif); font-size: 1.2rem; color: var(--cream); }
+
+  /* Accordions */
+  .acc { border-top: 1px solid var(--line); }
+  .acc__item { border-bottom: 1px solid var(--line); }
+  .acc__btn { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0;
+    font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cream); }
+  .acc__btn span.plus { color: var(--gold); transition: transform var(--t-fast); font-size: 1.2rem; }
+  .acc__item.is-open .plus { transform: rotate(45deg); }
+  .acc__panel { max-height: 0; overflow: hidden; transition: max-height var(--t-med) var(--ease); }
+  .acc__panel p { color: var(--muted); padding-bottom: 1.2rem; max-width: 60ch; }
+
+  /* Sticky ATC bar (mobile + on-scroll) */
+  .stickybar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: rgba(9,8,7,0.96);
+    backdrop-filter: blur(12px); border-top: 1px solid var(--line); transform: translateY(110%);
+    transition: transform var(--t-med) var(--ease); }
+  .stickybar.is-on { transform: none; }
+  .stickybar__in { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.8rem var(--gut); }
+  .stickybar__p { display: flex; flex-direction: column; }
+  .stickybar__p b { font-family: var(--serif); font-size: 1.1rem; }
+  .stickybar__p span { color: var(--gold-soft); font-size: 0.85rem; }
+
+  @media (max-width: 860px) {
+    .pdp__grid { grid-template-columns: 1fr; }
+    .gallery { position: static; }
+  }
+</style>
+</head>
+<body>
+
+<div class="announce"><div class="announce__track">
+  <span><b>Fri frakt</b> över 599 kr</span><span>Leverans <b>1-3 arbetsdagar</b></span><span>Betala med <b>Klarna</b></span><span>3 för 2 på hela sortimentet</span>
+  <span><b>Fri frakt</b> över 599 kr</span><span>Leverans <b>1-3 arbetsdagar</b></span><span>Betala med <b>Klarna</b></span><span>3 för 2 på hela sortimentet</span>
+</div></div>
+
+<header class="header" id="header">
+  <div class="wrap header__bar">
+    <button class="burger icon-btn" id="burger" aria-label="Meny"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    <a class="brand" href="index.html">NOVA</a>
+    <nav class="nav" aria-label="Huvudmeny">
+      <a href="index.html">Hem</a><a href="index.html#bestsellers">Parfymer</a><a href="index.html#bundle">3 för 2</a><a href="index.html#story">Om oss</a><a href="product.html" class="is-active">Doftguide</a>
+    </nav>
+    <div class="header__actions">
+      <button class="icon-btn show-lg" aria-label="Sök"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
+      <button class="icon-btn cart-btn" id="cartOpen" aria-label="Varukorg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><span class="cart-count">2</span></button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap pdp">
+  <nav class="crumbs"><a href="index.html">Hem</a> / <a href="index.html#bestsellers">Parfymer</a> / Oud Chaos</nav>
+
+  <div class="pdp__grid">
+    <!-- Gallery -->
+    <div class="gallery">
+      <div class="gallery__main" data-reveal>
+        <!-- TODO: real product photo, 1200x1500 -->
+        <div class="card__ph" id="galMark">OUD CHAOS<small>50 ML EXTRAIT</small></div>
+      </div>
+      <div class="gallery__thumbs">
+        <button class="thumb is-active" data-mark="OUD CHAOS">O</button>
+        <button class="thumb" data-mark="FLASKA">II</button>
+        <button class="thumb" data-mark="NOTER">III</button>
+        <button class="thumb" data-mark="BOX">IV</button>
+      </div>
+    </div>
+
+    <!-- Info -->
+    <div class="pinfo">
+      <span class="pinfo__badge" data-reveal>Inspirerad av ikonerna</span>
+      <h1 data-reveal>Oud Chaos</h1>
+      <p class="pinfo__notes" data-reveal>Oud · Läder · Svart krydda</p>
+      <div class="pinfo__rate" data-reveal><span class="stars">★★★★★</span> 4.9 av 5 · 312 omdömen</div>
+
+      <div class="pinfo__price" data-reveal>429 kr</div>
+      <p class="pinfo__klarna" data-reveal>Eller 4 räntefria delbetalningar à <b>107 kr</b> med Klarna.</p>
+
+      <p class="pinfo__desc" data-reveal>En mörk, rökig signatur byggd på äkta oud, mjukt läder och svartpeppar. Gjuten som ren Extrait de Parfum med 28 procent parfymolja för hållbarhet långt in på natten.</p>
+
+      <div class="sizes" data-reveal>
+        <button class="size is-active">50 ml</button>
+        <button class="size">10 ml prov</button>
+      </div>
+
+      <div class="buy" data-reveal>
+        <div class="qty"><button id="qMinus" aria-label="Minska">−</button><span id="qVal">1</span><button id="qPlus" aria-label="Öka">+</button></div>
+        <button class="btn btn--gold" style="flex:1;" id="atc">Lägg i varukorg · 429 kr</button>
+      </div>
+      <a href="#" class="btn btn--ghost btn--block" data-reveal>Köp nu med Klarna</a>
+
+      <div class="assure" data-reveal>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="m12 3 2.5 5 5.5.8-4 3.9 1 5.5L12 21l-5-2.8 1-5.5-4-3.9 5.5-.8L12 3Z"/></svg> Gratis prov i varje order</div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 13h13l3-5H6"/><circle cx="8" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg> Fri frakt över 599 kr, levereras 1-3 dagar</div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6l7-3Z"/></svg> 14 dagars öppet köp</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scent pyramid + accordions -->
+  <section class="section" style="padding-bottom:0;">
+    <div class="pdp__grid">
+      <div data-reveal>
+        <span class="eyebrow">Doftpyramiden</span>
+        <h2 class="h-lg" style="margin:1rem 0;">Hur Oud Chaos utvecklas</h2>
+        <dl class="pyramid">
+          <div class="pnote"><dt>Topp</dt><dd>Svartpeppar, Saffran, Bergamott</dd></div>
+          <div class="pnote"><dt>Hjärta</dt><dd>Ros, Oud, Patchouli</dd></div>
+          <div class="pnote"><dt>Bas</dt><dd>Läder, Ambra, Sandelträ</dd></div>
+        </dl>
+      </div>
+      <div data-reveal class="d1">
+        <div class="acc">
+          <div class="acc__item is-open">
+            <button class="acc__btn">Detaljer <span class="plus">+</span></button>
+            <div class="acc__panel"><p>50 ml Extrait de Parfum, 28 procent parfymolja. Vegansk och aldrig testad på djur. Tillverkad i Norden i små batcher.</p></div>
+          </div>
+          <div class="acc__item">
+            <button class="acc__btn">Frakt &amp; leverans <span class="plus">+</span></button>
+            <div class="acc__panel"><p>Fri frakt över 599 kr. Skickas inom 24 timmar, levereras på 1-3 arbetsdagar med spårning. Betala tryggt med Klarna eller kort.</p></div>
+          </div>
+          <div class="acc__item">
+            <button class="acc__btn">Returer <span class="plus">+</span></button>
+            <div class="acc__panel"><p>14 dagars öppet köp på oöppnade produkter. Provflaskor ingår alltid så att du kan känna dig trygg innan du öppnar.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="section">
+    <div class="shead" data-reveal><h2 class="h-xl">Du kanske också gillar</h2></div>
+    <div class="pgrid">
+      <article class="card" data-reveal><div class="card__media"><div class="card__ph">PACIFICO<small>50 ML EXTRAIT</small></div><div class="card__quick"><a href="product.html" class="btn btn--gold btn--block">Lägg i varukorg</a></div></div><div class="card__info"><h3 class="card__title">Pacifico</h3><p class="card__notes">Citrus · Aromatisk</p><div class="card__row"><span class="stars">★★★★★</span><span class="card__price">399 kr</span></div></div></article>
+      <article class="card d1" data-reveal><div class="card__media"><div class="card__ph">BLUE STALLION<small>50 ML EXTRAIT</small></div><div class="card__quick"><a href="product.html" class="btn btn--gold btn--block">Lägg i varukorg</a></div></div><div class="card__info"><h3 class="card__title">Blue Stallion</h3><p class="card__notes">Akvatisk · Ambra</p><div class="card__row"><span class="stars">★★★★☆</span><span class="card__price">399 kr</span></div></div></article>
+      <article class="card d2" data-reveal><div class="card__media"><span class="card__badge">Nyhet</span><div class="card__ph">PURPLE NIGHTS<small>50 ML EXTRAIT</small></div><div class="card__quick"><a href="product.html" class="btn btn--gold btn--block">Lägg i varukorg</a></div></div><div class="card__info"><h3 class="card__title">Purple Nights</h3><p class="card__notes">Söt · Vanilj</p><div class="card__row"><span class="stars">★★★★★</span><span class="card__price">429 kr</span></div></div></article>
+      <article class="card d3" data-reveal><div class="card__media"><div class="card__ph">VERANO<small>50 ML EXTRAIT</small></div><div class="card__quick"><a href="product.html" class="btn btn--gold btn--block">Lägg i varukorg</a></div></div><div class="card__info"><h3 class="card__title">Verano</h3><p class="card__notes">Kokos · Solig</p><div class="card__row"><span class="stars">★★★★★</span><span class="card__price">399 kr</span></div></div></article>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand"><span class="brand">NOVA</span><p>Extrait de Parfum, tillverkad i Norden. Lyxiga dofter inspirerade av ikonerna, utan lyxpåslaget.</p></div>
+      <div class="fcol"><h4>Handla</h4><a href="index.html#bestsellers">Alla parfymer</a><a href="index.html#bestsellers">Bästsäljare</a><a href="index.html#bundle">3 för 2</a></div>
+      <div class="fcol"><h4>Hjälp</h4><a href="#">Frakt &amp; leverans</a><a href="#">Returer</a><a href="#">Kontakt</a></div>
+      <div class="fcol"><h4>Nova Parfumes AB</h4><a href="#">Om oss</a><a href="mailto:info@novascents.se">info@novascents.se</a><a href="#">Göteborg, Sverige</a></div>
+    </div>
+    <div class="footer__bottom"><span>© 2026 Nova Parfumes AB. Alla rättigheter förbehållna.</span><span class="pay">Trygg betalning med <b>Klarna</b> &amp; kort</span></div>
+  </div>
+</footer>
+
+<nav class="mnav" id="mnav" aria-label="Mobilmeny">
+  <a href="index.html">Hem</a><a href="index.html#bestsellers">Parfymer</a><a href="index.html#bundle">3 för 2</a><a href="index.html#story">Om oss</a><a href="product.html">Doftguide</a>
+</nav>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Varukorg">
+  <div class="drawer__head"><h3>Din varukorg</h3><button class="icon-btn" id="cartClose" aria-label="Stäng"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="drawer__body" id="drawerBody">
+    <div class="drawer__line"><div class="drawer__thumb">O</div><div><h4 style="font-family:var(--serif);font-size:1.1rem;">Oud Chaos</h4><p style="color:var(--muted-2);font-size:0.8rem;">50 ml · Antal 1</p><span style="color:var(--gold-soft);font-size:0.9rem;">429 kr</span></div></div>
+  </div>
+  <div class="drawer__foot"><div class="drawer__total"><span>Delsumma</span><b id="drawerTotal">429 kr</b></div><a href="#" class="btn btn--gold btn--block">Till kassan</a></div>
+</aside>
+
+<!-- Sticky add-to-cart -->
+<div class="stickybar" id="stickybar">
+  <div class="wrap stickybar__in">
+    <div class="stickybar__p"><b>Oud Chaos</b><span>429 kr · 50 ml</span></div>
+    <button class="btn btn--gold" id="atc2">Lägg i varukorg</button>
+  </div>
+</div>
+
+<script src="assets/site.js" defer></script>
+</body>
+</html>
