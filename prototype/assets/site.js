@@ -5,6 +5,22 @@
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
 
+  /* Hero title: split into per-letter spans for the blur-up reveal.
+     Skipped under reduced motion (parent shows static gold-gradient text). */
+  function letters() {
+    if (reduce) return;
+    $$('[data-letters]').forEach(function (el) {
+      var text = el.textContent, frag = document.createDocumentFragment(), i = 0;
+      text.split('').forEach(function (ch) {
+        if (ch === ' ') { frag.appendChild(document.createTextNode(' ')); return; }
+        var s = document.createElement('span');
+        s.className = 'ltr'; s.textContent = ch; s.style.setProperty('--i', i++);
+        frag.appendChild(s);
+      });
+      el.textContent = ''; el.appendChild(frag);
+    });
+  }
+
   /* Scroll reveal */
   function reveal() {
     var els = $$('[data-reveal]:not(.in)');
@@ -98,6 +114,6 @@
     var atc2 = $('#atc2'); if (atc2) atc2.addEventListener('click', function () { added(atc2); });
   }
 
-  function init() { reveal(); header(); overlays(); pdp(); }
+  function init() { letters(); reveal(); header(); overlays(); pdp(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
