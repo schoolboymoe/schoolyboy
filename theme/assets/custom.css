@@ -21,15 +21,20 @@
   --lux-slow: 520ms;
   --lux-shadow-sm: 0 1px 2px rgba(20, 18, 14, 0.05), 0 4px 14px rgba(20, 18, 14, 0.06);
   --lux-shadow-lg: 0 10px 30px rgba(20, 18, 14, 0.12), 0 2px 8px rgba(20, 18, 14, 0.08);
-
-  /* Re-point the theme's accent tokens toward gold for cohesion.
-     Primary buttons stay near-black (set in theme settings) for contrast. */
-  --colors-icon-rating: var(--accent-gold) !important;
-  --colors-text-link: var(--accent-gold) !important;
 }
 
+/* The gold accent palette and the Gilda Display (serif) + Jost (sans) type
+   pairing are set theme-natively in config/settings_data.json so they cascade
+   through the theme's own token system. This file only adds the polish the
+   settings can't express. */
+
+/* Gold text selection + smooth in-page scrolling. */
+::selection { background: var(--accent-gold-tint); color: #17130c; }
+html { scroll-behavior: smooth; }
+
 /* --------------------------------------------------------------------------
-   Typography — crisper rendering and a more considered headline rhythm.
+   Typography — crisper rendering and headline rhythm tuned for the new
+   Gilda Display serif (high-contrast; wants generous leading, open tracking).
    -------------------------------------------------------------------------- */
 body {
   -webkit-font-smoothing: antialiased;
@@ -37,10 +42,13 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3, .h1, .h2, .h3 {
+h1, h2, h3, .h1, .h2, .h3,
+h4, h5, h6, .h4, .h5, .h6 {
   text-wrap: balance;            /* avoids lonely last words in headings */
-  letter-spacing: -0.01em;
+  letter-spacing: 0;             /* serif display reads best near 0 tracking */
+  font-feature-settings: "liga" 1, "kern" 1;
 }
+h1, h2, .h1, .h2 { line-height: 1.08; }
 
 /* Small all-caps "eyebrow" labels read as editorial / premium. */
 .lux-eyebrow {
