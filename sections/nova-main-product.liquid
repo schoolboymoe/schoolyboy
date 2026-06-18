@@ -1,0 +1,235 @@
+{%- liquid
+  assign s = section.settings
+  assign uid = section.id
+  assign cv = product.selected_or_first_available_variant
+  assign top = product.metafields.custom.top_notes.value | default: s.top_notes
+  assign heart = product.metafields.custom.heart_notes.value | default: s.heart_notes
+  assign base = product.metafields.custom.base_notes.value | default: s.base_notes
+-%}
+
+<div class="nova">
+  <div class="nova-wrap nova-pdp">
+    <nav class="nova-crumbs"><a href="{{ routes.root_url }}">Hem</a> / <a href="{{ routes.all_products_collection_url }}">Parfymer</a> / {{ product.title | escape }}</nav>
+
+    <div class="nova-pdp__grid">
+      <!-- Gallery -->
+      <div class="nova-gallery">
+        <div class="nova-gallery__main" data-reveal>
+          {%- if product.featured_image -%}
+            <img id="nova-gmain-{{ uid }}" src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.title | escape }}" width="1200" height="1500">
+          {%- else -%}
+            <span class="nova-gallery__ph">{{ product.title | escape }}</span>
+          {%- endif -%}
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="nova-gallery__thumbs">
+            {%- for image in product.images limit: 4 -%}
+              <button type="button" class="nova-thumb {% if forloop.first %}is-active{% endif %}" data-src="{{ image | image_url: width: 1200 }}">
+                <img src="{{ image | image_url: width: 220 }}" alt="" loading="lazy">
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Info -->
+      <div class="nova-pdp__info">
+        {%- if s.badge_text != blank -%}<span class="nova-badge2" data-reveal>{{ s.badge_text | escape }}</span>{%- endif -%}
+        <h1 data-reveal>{{ product.title | escape }}</h1>
+        {%- if product.type != blank -%}<p class="nova-pdp__notes" data-reveal>{{ product.type | escape }}</p>{%- endif -%}
+        {%- if s.rating_text != blank -%}<div class="nova-pdp__rate" data-reveal><span class="nova-stars">★★★★★</span> {{ s.rating_text | escape }}</div>{%- endif -%}
+
+        <div class="nova-pdp__price" data-reveal id="nova-price-{{ uid }}">
+          {{ cv.price | money }}
+          {%- if cv.compare_at_price > cv.price -%}<del>{{ cv.compare_at_price | money }}</del>{%- endif -%}
+        </div>
+        {%- if s.klarna_text != blank -%}<p class="nova-pdp__klarna" data-reveal>{{ s.klarna_text }}</p>{%- endif -%}
+
+        {%- if product.description != blank -%}<div class="nova-pdp__desc" data-reveal>{{ product.description | strip_html | truncatewords: 45 }}</div>{%- endif -%}
+
+        {%- form 'product', product, id: 'nova-form', class: 'nova-pdp__form' -%}
+          {%- if product.has_only_default_variant == false -%}
+            <div class="nova-sizes" data-reveal data-variants>
+              {%- for variant in product.variants -%}
+                <button type="button" class="nova-size {% if variant.id == cv.id %}is-active{% endif %}"
+                  data-vid="{{ variant.id }}" data-price="{{ variant.price | money }}" {% unless variant.available %}disabled{% endunless %}>{{ variant.title | escape }}</button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+          <input type="hidden" name="id" value="{{ cv.id }}" data-variant-input>
+
+          <div class="nova-buy" data-reveal>
+            <div class="nova-qty">
+              <button type="button" data-q="-" aria-label="Minska">−</button>
+              <input type="number" name="quantity" value="1" min="1" inputmode="numeric" aria-label="Antal">
+              <button type="button" data-q="+" aria-label="Öka">+</button>
+            </div>
+            <button type="submit" class="nova-btn nova-btn--gold" style="flex:1;" {% unless product.available %}disabled{% endunless %}>
+              {%- if product.available -%}Lägg i varukorg{%- else -%}Slutsåld{%- endif -%}
+            </button>
+          </div>
+        {%- endform -%}
+
+        <div class="nova-assure" data-reveal>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="m12 3 2.5 5 5.5.8-4 3.9 1 5.5L12 21l-5-2.8 1-5.5-4-3.9 5.5-.8L12 3Z"/></svg> {{ s.assure1 | escape }}</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 13h13l3-5H6"/><circle cx="8" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg> {{ s.assure2 | escape }}</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6l7-3Z"/></svg> {{ s.assure3 | escape }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pyramid + accordions -->
+    <section class="nova-section" style="padding-bottom:0;">
+      <div class="nova-pdp__grid">
+        {%- if top != blank or heart != blank or base != blank -%}
+          <div data-reveal>
+            <span class="nova-eyebrow">Doftpyramiden</span>
+            <h2 class="nova-h3" style="margin:1rem 0;">Hur {{ product.title | escape }} utvecklas</h2>
+            <dl class="nova-pyramid">
+              {%- if top != blank -%}<div class="nova-pnote"><dt>Topp</dt><dd>{{ top }}</dd></div>{%- endif -%}
+              {%- if heart != blank -%}<div class="nova-pnote"><dt>Hjärta</dt><dd>{{ heart }}</dd></div>{%- endif -%}
+              {%- if base != blank -%}<div class="nova-pnote"><dt>Bas</dt><dd>{{ base }}</dd></div>{%- endif -%}
+            </dl>
+          </div>
+        {%- endif -%}
+        <div data-reveal data-reveal-delay="1">
+          <div class="nova-acc">
+            <div class="nova-acc__item is-open">
+              <button class="nova-acc__btn" type="button">Detaljer <span class="plus">+</span></button>
+              <div class="nova-acc__panel"><div>{{ s.details_text }}</div></div>
+            </div>
+            <div class="nova-acc__item">
+              <button class="nova-acc__btn" type="button">Frakt &amp; leverans <span class="plus">+</span></button>
+              <div class="nova-acc__panel"><div>{{ s.shipping_text }}</div></div>
+            </div>
+            <div class="nova-acc__item">
+              <button class="nova-acc__btn" type="button">Returer <span class="plus">+</span></button>
+              <div class="nova-acc__panel"><div>{{ s.returns_text }}</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related -->
+    {%- assign rel = product.collections.first.products | default: collections.all.products -%}
+    {%- if rel.size > 1 -%}
+      <section class="nova-section">
+        <div class="nova-shead" data-reveal><h2 class="nova-h2">Du kanske också gillar</h2></div>
+        <div class="nova-grid">
+          {%- assign shown = 0 -%}
+          {%- for p in rel -%}
+            {%- if p.id != product.id and shown < 4 -%}
+              {%- assign shown = shown | plus: 1 -%}
+              <article class="nova-card" data-reveal>
+                <a href="{{ p.url }}" class="nova-card__media">
+                  {%- if p.featured_image -%}{{ p.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '300,450,600,700', alt: p.title | escape }}{%- else -%}<span class="nova-card__ph">{{ p.title | escape }}</span>{%- endif -%}
+                </a>
+                <div class="nova-card__info"><h3 class="nova-card__title">{{ p.title | escape }}</h3>{%- if p.type != blank -%}<p class="nova-card__notes">{{ p.type | escape }}</p>{%- endif -%}<div class="nova-card__row"><span class="nova-stars">★★★★★</span><span class="nova-card__price">{{ p.price | money }}</span></div></div>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </section>
+    {%- endif -%}
+  </div>
+
+  <!-- Sticky add-to-cart -->
+  <div class="nova-sticky" id="nova-sticky-{{ uid }}">
+    <div class="nova-wrap nova-sticky__in">
+      <div class="nova-sticky__p"><b>{{ product.title | escape }}</b><span id="nova-sprice-{{ uid }}">{{ cv.price | money }}</span></div>
+      <button class="nova-btn nova-btn--gold" type="submit" form="nova-form" {% unless product.available %}disabled{% endunless %}>Lägg i varukorg</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var uid = {{ uid | json }};
+  var root = document.currentScript.previousElementSibling ? document : document;
+  var wrap = document.querySelector('.nova-pdp');
+  if (!wrap) return;
+
+  // Gallery thumbnails
+  var main = document.getElementById('nova-gmain-' + uid);
+  wrap.querySelectorAll('.nova-thumb').forEach(function (t) {
+    t.addEventListener('click', function () {
+      wrap.querySelectorAll('.nova-thumb').forEach(function (x) { x.classList.remove('is-active'); });
+      t.classList.add('is-active');
+      if (main && t.dataset.src) main.src = t.dataset.src;
+    });
+  });
+
+  // Variant selection
+  var hidden = wrap.querySelector('[data-variant-input]');
+  var priceEl = document.getElementById('nova-price-' + uid);
+  var sPriceEl = document.getElementById('nova-sprice-' + uid);
+  wrap.querySelectorAll('.nova-size').forEach(function (b) {
+    if (b.hasAttribute('disabled')) return;
+    b.addEventListener('click', function () {
+      wrap.querySelectorAll('.nova-size').forEach(function (x) { x.classList.remove('is-active'); });
+      b.classList.add('is-active');
+      if (hidden) hidden.value = b.dataset.vid;
+      if (priceEl) priceEl.firstChild.nodeValue = b.dataset.price + ' ';
+      if (sPriceEl) sPriceEl.textContent = b.dataset.price;
+    });
+  });
+
+  // Quantity
+  var qty = wrap.querySelector('.nova-qty input');
+  wrap.querySelectorAll('.nova-qty [data-q]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var v = parseInt(qty.value, 10) || 1;
+      v = b.dataset.q === '+' ? v + 1 : Math.max(1, v - 1);
+      qty.value = v;
+    });
+  });
+
+  // Accordions
+  wrap.querySelectorAll('.nova-acc__btn').forEach(function (btn) {
+    var item = btn.parentElement, panel = btn.nextElementSibling;
+    function set(open) { item.classList.toggle('is-open', open); panel.style.maxHeight = open ? panel.scrollHeight + 'px' : 0; }
+    if (item.classList.contains('is-open')) set(true);
+    btn.addEventListener('click', function () { set(!item.classList.contains('is-open')); });
+  });
+
+  // Sticky add-to-cart bar
+  var bar = document.getElementById('nova-sticky-' + uid);
+  var form = document.getElementById('nova-form');
+  if (bar && form) {
+    var tick = false;
+    function up() {
+      var r = form.getBoundingClientRect();
+      var atBottom = (window.innerHeight + window.scrollY) > (document.body.offsetHeight - 220);
+      bar.classList.toggle('is-on', r.bottom < 0 && !atBottom);
+      tick = false;
+    }
+    window.addEventListener('scroll', function () { if (!tick) { requestAnimationFrame(up); tick = true; } }, { passive: true });
+    up();
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Nova product",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "badge_text", "label": "Badge", "default": "Inspirerad av ikonerna" },
+    { "type": "text", "id": "rating_text", "label": "Rating text", "default": "4.9 av 5 · verifierade omdömen" },
+    { "type": "richtext", "id": "klarna_text", "label": "Klarna line", "default": "<p>Dela upp betalningen räntefritt med Klarna.</p>" },
+    { "type": "header", "content": "Scent pyramid (fallback if no product metafields)" },
+    { "type": "text", "id": "top_notes", "label": "Top notes", "default": "Bergamott, Saffran, Svartpeppar" },
+    { "type": "text", "id": "heart_notes", "label": "Heart notes", "default": "Ros, Oud, Patchouli" },
+    { "type": "text", "id": "base_notes", "label": "Base notes", "default": "Läder, Ambra, Sandelträ" },
+    { "type": "header", "content": "Assurances" },
+    { "type": "text", "id": "assure1", "label": "Assurance 1", "default": "Gratis prov i varje order" },
+    { "type": "text", "id": "assure2", "label": "Assurance 2", "default": "Fri frakt över 599 kr, 1-3 dagar" },
+    { "type": "text", "id": "assure3", "label": "Assurance 3", "default": "14 dagars öppet köp" },
+    { "type": "header", "content": "Accordions" },
+    { "type": "richtext", "id": "details_text", "label": "Details", "default": "<p>Extrait de Parfum med hög andel parfymolja. Vegansk och aldrig testad på djur. Tillverkad i Norden.</p>" },
+    { "type": "richtext", "id": "shipping_text", "label": "Shipping", "default": "<p>Fri frakt över 599 kr. Skickas inom 24 timmar, levereras på 1-3 arbetsdagar med spårning.</p>" },
+    { "type": "richtext", "id": "returns_text", "label": "Returns", "default": "<p>14 dagars öppet köp på oöppnade produkter. Provflaskor ingår alltid.</p>" }
+  ]
+}
+{% endschema %}
