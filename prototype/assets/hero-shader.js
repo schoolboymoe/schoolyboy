@@ -30,13 +30,13 @@
     '  float rx = p.x * (1.0 + d);',
     '  float gx = p.x;',
     '  float bx = p.x * (1.0 - d);',
-    '  float i1 = 0.034 / abs(p.y + sin((rx + time) * xScale) * yScale);',
-    '  float i2 = 0.034 / abs(p.y + sin((gx + time) * xScale) * yScale);',
-    '  float i3 = 0.034 / abs(p.y + sin((bx + time) * xScale) * yScale);',
-    '  vec3 hot  = vec3(0.96, 0.86, 0.55);',  // cream-gold core
-    '  vec3 gold = vec3(0.79, 0.64, 0.29);',  // #c9a44a
-    '  vec3 deep = vec3(0.45, 0.32, 0.10);',  // bronze
-    '  vec3 col = hot * i2 + gold * i1 * 0.7 + deep * i3 * 0.7;',
+    '  float i1 = 0.020 / abs(p.y + sin((rx + time) * xScale) * yScale);',
+    '  float i2 = 0.020 / abs(p.y + sin((gx + time) * xScale) * yScale);',
+    '  float i3 = 0.020 / abs(p.y + sin((bx + time) * xScale) * yScale);',
+    '  vec3 hot  = vec3(0.92, 0.80, 0.48);',  // cream-gold core (toned down)
+    '  vec3 gold = vec3(0.70, 0.55, 0.24);',  // gold
+    '  vec3 deep = vec3(0.38, 0.27, 0.09);',  // bronze
+    '  vec3 col = hot * i2 * 0.8 + gold * i1 * 0.5 + deep * i3 * 0.5;',
     '  gl_FragColor = vec4(col, 1.0);',
     '}'
   ].join('\n');

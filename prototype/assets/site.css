@@ -142,7 +142,30 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; line-height: 1.04;
    from the Three.js WebGLShader reference into a tiny dependency-free raw
    WebGL bootstrap (assets/hero-shader.js), recoloured from RGB neon to brand
    gold. Falls back to the .hero__bg gradient when WebGL is unavailable. */
-.hero__shader { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; display: block; opacity: 0.92; }
+.hero__shader { position: absolute; inset: 0; z-index: -3; width: 100%; height: 100%; display: block; opacity: 0.55; }
+
+/* Bottle lineup emerging from the dark behind the wordmark. CSS-built dark-glass
+   placeholders that read as a seamless product backdrop; swap each .bottle for a
+   real cut-out bottle photo (transparent PNG) on the Shopify port. */
+.hero__bottles { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
+  width: min(1120px, 96%); height: 46%; z-index: -2; pointer-events: none;
+  display: flex; align-items: flex-end; justify-content: center; gap: clamp(8px, 2.6vw, 40px);
+  opacity: 0.9; filter: blur(0.3px);
+  -webkit-mask-image: linear-gradient(to top, #000 26%, rgba(0,0,0,0.55) 60%, transparent 94%);
+  mask-image: linear-gradient(to top, #000 26%, rgba(0,0,0,0.55) 60%, transparent 94%); }
+.hero__bottles::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 42%;
+  background: radial-gradient(60% 100% at 50% 100%, rgba(201,164,74,0.14), transparent 72%); }
+.bottle { position: relative; width: clamp(44px, 7.5vw, 100px); border-radius: 9px 9px 13px 13px;
+  background: linear-gradient(180deg, #2a2417 0%, #15110b 42%, #0a0806 100%);
+  box-shadow: inset 0 0 0 1px rgba(201,164,74,0.16), inset 9px 0 20px rgba(0,0,0,0.6), inset -11px 0 24px rgba(0,0,0,0.72); }
+.bottle::before { content: ""; position: absolute; inset: 0; border-radius: inherit;
+  background: linear-gradient(102deg, transparent 36%, rgba(227,200,120,0.20) 50%, transparent 63%); }
+.bottle::after { content: ""; position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+  width: 36%; height: 15px; border-radius: 4px 4px 2px 2px;
+  background: linear-gradient(180deg, #3a3220, #15110b); box-shadow: inset 0 0 0 1px rgba(201,164,74,0.18); }
+.bottle.b1 { height: 60%; } .bottle.b2 { height: 82%; } .bottle.b3 { height: 70%; }
+.bottle.b4 { height: 92%; } .bottle.b5 { height: 64%; }
+@media (max-width: 600px) { .bottle.b1, .bottle.b5 { display: none; } }
 .hero__grain { position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.5;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E"); }
 .hero__vignette { position: absolute; inset: 0; z-index: -1; pointer-events: none;
