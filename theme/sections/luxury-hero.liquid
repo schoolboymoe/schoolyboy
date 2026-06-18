@@ -1,13 +1,13 @@
 {%- comment -%}
-  Nova Scents — Luxury Animated Hero
+  Nova Scents : Luxury Animated Hero (v2)
   ----------------------------------------------------------------------------
-  Self-contained, opt-in hero section. Add it from the theme editor
-  (Add section → Luxury hero). Nothing else in the theme depends on it, so it
-  is safe to add, remove, or reorder. All styles are scoped to this instance
-  via `#lux-hero-{{ section.id }}` and all motion respects reduced-motion.
-
-  Animation: slow Ken Burns zoom on the image, a one-pass gold light sweep,
-  and a staggered fade-up reveal of the copy.
+  Ported from the approved prototype. Three layers behind the wordmark:
+    1. A gold WebGL light-wave shader (dependency-free raw WebGL).
+    2. A bottle lineup pulled from a chosen collection's real product images,
+       masked so the bottles rise out of the dark seamlessly.
+    3. A grain + vignette finish.
+  The wordmark reveals letter by letter. Everything is scoped to this section
+  instance and degrades gracefully (no WebGL, reduced motion, no collection).
 {%- endcomment -%}
 
 {%- liquid
@@ -15,216 +15,161 @@
   assign uid = section.id
   assign min_h = '100vh'
   case s.height
-    when 'small'
-      assign min_h = '58vh'
     when 'medium'
-      assign min_h = '74vh'
+      assign min_h = '78vh'
     when 'large'
-      assign min_h = '88vh'
+      assign min_h = '90vh'
   endcase
-  assign align = s.text_alignment | default: 'center'
 -%}
 
 {%- style -%}
-  #lux-hero-{{ uid }} {
-    position: relative;
-    min-height: {{ min_h }};
-    display: flex;
-    align-items: {% if s.vertical_position == 'top' %}flex-start{% elsif s.vertical_position == 'bottom' %}flex-end{% else %}center{% endif %};
-    overflow: hidden;
-    background-color: #0e0c0a;
-    isolation: isolate;
-  }
-  #lux-hero-{{ uid }} .lux-hero__media {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-  #lux-hero-{{ uid }} .lux-hero__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: {{ s.focal_point | default: 'center' }};
-    display: block;
-    transform: scale(1.08);
-    animation: luxKenBurns-{{ uid }} 18s var(--lux-ease, ease-out) forwards;
-  }
-  #lux-hero-{{ uid }} .lux-hero__overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background:
-      linear-gradient(to top, rgba(8,7,5,{{ s.overlay_opacity | divided_by: 100.0 }}) 0%, rgba(8,7,5,{{ s.overlay_opacity | times: 0.45 | divided_by: 100.0 }}) 55%, rgba(8,7,5,{{ s.overlay_opacity | times: 0.25 | divided_by: 100.0 }}) 100%);
-  }
-  /* One-pass diagonal gold light sweep. */
-  #lux-hero-{{ uid }} .lux-hero__sweep {
-    position: absolute;
-    inset: -20%;
-    z-index: 2;
-    pointer-events: none;
-    background: linear-gradient(115deg, transparent 38%, rgba(201,164,74,0.16) 50%, transparent 62%);
-    transform: translateX(-120%);
-    animation: luxSweep-{{ uid }} 2.6s var(--lux-ease, ease-out) 0.5s 1;
-  }
-  #lux-hero-{{ uid }} .lux-hero__inner {
-    position: relative;
-    z-index: 3;
-    width: 100%;
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: clamp(2.5rem, 6vw, 6rem) clamp(1.25rem, 5vw, 4rem);
-    text-align: {{ align }};
-    color: #fff;
-  }
-  #lux-hero-{{ uid }} .lux-hero__content {
-    max-width: {% if align == 'center' %}48rem; margin-inline: auto{% else %}40rem{% endif %};
-  }
-  #lux-hero-{{ uid }} .lux-hero__eyebrow {
-    display: inline-block;
-    margin: 0 0 1rem;
-    font-size: 0.74rem;
-    font-weight: 600;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: #d9b96a;
-  }
-  #lux-hero-{{ uid }} .lux-hero__heading {
-    margin: 0;
-    color: #fff;
-    font-size: clamp(2.4rem, 6vw, 4.75rem);
-    line-height: 1.04;
-    letter-spacing: -0.015em;
-    text-wrap: balance;
-  }
-  #lux-hero-{{ uid }} .lux-hero__heading .lux-hl {
-    background: linear-gradient(90deg, #e7c878, #b8893b 55%, #e7c878);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-style: italic;
-  }
-  #lux-hero-{{ uid }} .lux-hero__text {
-    margin: 1.15rem auto 0;
-    max-width: 40rem;
-    font-size: clamp(1rem, 1.4vw, 1.18rem);
-    line-height: 1.6;
-    color: rgba(255,255,255,0.86);
-  }
-  {% if align != 'center' %}#lux-hero-{{ uid }} .lux-hero__text { margin-inline: 0; }{% endif %}
-  #lux-hero-{{ uid }} .lux-hero__cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.85rem;
-    margin-top: 2rem;
-    justify-content: {% if align == 'center' %}center{% elsif align == 'right' %}flex-end{% else %}flex-start{% endif %};
-  }
-  #lux-hero-{{ uid }} .lux-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.95rem 2rem;
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 2px;
-    transition: transform 180ms var(--lux-ease, ease), box-shadow 180ms var(--lux-ease, ease), background-color 180ms var(--lux-ease, ease);
-  }
-  #lux-hero-{{ uid }} .lux-btn:hover { transform: translateY(-2px); }
-  #lux-hero-{{ uid }} .lux-btn--gold {
-    background: linear-gradient(135deg, #c9a44a, #b8893b);
-    color: #17130c;
-    box-shadow: 0 8px 24px rgba(184,137,59,0.32);
-  }
-  #lux-hero-{{ uid }} .lux-btn--gold:hover { box-shadow: 0 12px 30px rgba(184,137,59,0.42); }
-  #lux-hero-{{ uid }} .lux-btn--ghost {
-    background: transparent;
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.55);
-  }
-  #lux-hero-{{ uid }} .lux-btn--ghost:hover { background: rgba(255,255,255,0.10); border-color: #fff; }
-
-  /* Staggered reveal of the copy. */
-  #lux-hero-{{ uid }} [data-anim] {
-    opacity: 0;
-    transform: translateY(22px);
-    animation: luxRise-{{ uid }} 0.9s var(--lux-ease, ease-out) forwards;
-  }
-  #lux-hero-{{ uid }} [data-anim="1"] { animation-delay: 0.15s; }
-  #lux-hero-{{ uid }} [data-anim="2"] { animation-delay: 0.32s; }
-  #lux-hero-{{ uid }} [data-anim="3"] { animation-delay: 0.49s; }
-  #lux-hero-{{ uid }} [data-anim="4"] { animation-delay: 0.66s; }
-
-  @keyframes luxKenBurns-{{ uid }} {
-    from { transform: scale(1.08); }
-    to   { transform: scale(1.0); }
-  }
-  @keyframes luxSweep-{{ uid }} {
-    from { transform: translateX(-120%); }
-    to   { transform: translateX(120%); }
-  }
-  @keyframes luxRise-{{ uid }} {
-    to { opacity: 1; transform: none; }
-  }
-
+  #lxh-{{ uid }} { position: relative; min-height: {{ min_h }}; display: flex; align-items: center;
+    justify-content: center; overflow: hidden; isolation: isolate; background: #0b0a09; text-align: center; }
+  #lxh-{{ uid }} .lxh-bg { position: absolute; inset: 0; z-index: -4;
+    background: radial-gradient(120% 90% at 50% -10%, #2b2113 0%, #0b0a09 58%); }
+  #lxh-{{ uid }} .lxh-shader { position: absolute; inset: 0; z-index: -3; width: 100%; height: 100%;
+    display: block; opacity: {{ s.shader_opacity | divided_by: 100.0 }}; }
+  #lxh-{{ uid }} .lxh-bottles { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
+    width: min(1120px, 96%); height: 46%; z-index: -2; pointer-events: none;
+    display: flex; align-items: flex-end; justify-content: center; gap: clamp(6px, 2.4vw, 38px);
+    -webkit-mask-image: linear-gradient(to top, #000 24%, rgba(0,0,0,0.5) 60%, transparent 94%);
+    mask-image: linear-gradient(to top, #000 24%, rgba(0,0,0,0.5) 60%, transparent 94%); }
+  #lxh-{{ uid }} .lxh-bottles::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 40%;
+    background: radial-gradient(60% 100% at 50% 100%, rgba(201,164,74,0.14), transparent 72%); }
+  #lxh-{{ uid }} .lxh-bottle { flex: 0 0 auto; width: clamp(54px, 9vw, 120px); display: flex; align-items: flex-end; }
+  #lxh-{{ uid }} .lxh-bottle img { width: 100%; height: auto; object-fit: contain; display: block; opacity: 0.92; }
+  #lxh-{{ uid }} .lxh-bottle:nth-child(1) { transform: translateY(14%) scale(0.86); opacity: 0.8; }
+  #lxh-{{ uid }} .lxh-bottle:nth-child(2) { transform: translateY(4%) scale(0.96); }
+  #lxh-{{ uid }} .lxh-bottle:nth-child(4) { transform: translateY(2%) scale(0.98); }
+  #lxh-{{ uid }} .lxh-bottle:nth-child(5) { transform: translateY(16%) scale(0.84); opacity: 0.8; }
+  #lxh-{{ uid }} .lxh-grain { position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.4;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E"); }
+  #lxh-{{ uid }} .lxh-vignette { position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(6,5,4,0.82) 100%); }
+  #lxh-{{ uid }} .lxh-inner { position: relative; z-index: 2; width: 100%; padding: clamp(2.5rem, 6vw, 6rem) clamp(1.1rem, 4vw, 3rem); }
+  #lxh-{{ uid }} .lxh-eyebrow { display: inline-block; font-size: 0.72rem; letter-spacing: 0.28em;
+    text-transform: uppercase; color: #c9a44a; font-weight: 500; }
+  #lxh-{{ uid }} .lxh-mark { font-family: var(--font-heading-family, Georgia, serif);
+    font-size: clamp(4.5rem, 17vw, 13rem); letter-spacing: 0.12em; padding-left: 0.12em; line-height: 0.92;
+    margin: 1.2rem 0 0; font-weight: 500;
+    background: linear-gradient(180deg, #fbf4df 0%, #e3c878 46%, #a98432 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent; }
+  #lxh-{{ uid }} .lxh-mark .ltr { display: inline-block; will-change: transform, filter;
+    background: linear-gradient(180deg, #fbf4df 0%, #e3c878 46%, #a98432 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: lxhRise-{{ uid }} 0.9s cubic-bezier(0.22,1,0.36,1) both; animation-delay: calc(var(--i) * 0.06s); }
+  #lxh-{{ uid }} .lxh-sub { display: block; font-family: var(--font-body-family, sans-serif); font-size: 0.78rem;
+    letter-spacing: 0.5em; text-transform: uppercase; color: #b3a892; margin-top: 1.3rem; padding-left: 0.5em; }
+  #lxh-{{ uid }} .lxh-line { font-family: var(--font-heading-family, Georgia, serif); font-style: italic;
+    font-size: clamp(1.4rem, 3.2vw, 2.3rem); color: #f4efe4; margin-top: 2rem; }
+  #lxh-{{ uid }} .lxh-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.4rem; }
+  #lxh-{{ uid }} .lxh-btn { display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--font-body-family, sans-serif); font-weight: 500; font-size: 0.8rem; letter-spacing: 0.16em;
+    text-transform: uppercase; padding: 1rem 2.2rem; border-radius: 999px; white-space: nowrap;
+    transition: transform 180ms cubic-bezier(0.22,1,0.36,1), box-shadow 180ms ease; }
+  #lxh-{{ uid }} .lxh-btn:hover { transform: translateY(-2px); }
+  #lxh-{{ uid }} .lxh-btn--gold { background: linear-gradient(135deg, #e3c878, #c9a44a); color: #17120a; }
+  #lxh-{{ uid }} .lxh-btn--gold:hover { box-shadow: 0 10px 30px rgba(201,164,74,0.32); }
+  #lxh-{{ uid }} .lxh-btn--ghost { border: 1px solid rgba(214,197,160,0.32); color: #f4efe4; }
+  #lxh-{{ uid }} .lxh-btn--ghost:hover { border-color: #c9a44a; color: #e3c878; }
+  @keyframes lxhRise-{{ uid }} { from { opacity: 0; transform: translateY(0.42em); filter: blur(10px); } to { opacity: 1; transform: none; filter: blur(0); } }
   @media (prefers-reduced-motion: reduce) {
-    #lux-hero-{{ uid }} .lux-hero__media img,
-    #lux-hero-{{ uid }} .lux-hero__sweep,
-    #lux-hero-{{ uid }} [data-anim] {
-      animation: none !important;
-      opacity: 1 !important;
-      transform: none !important;
-    }
+    #lxh-{{ uid }} .lxh-mark .ltr { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
   }
 {%- endstyle -%}
 
-<section id="lux-hero-{{ uid }}" class="lux-hero" aria-label="{{ s.heading | default: 'Featured' | escape }}">
-  <div class="lux-hero__media">
-    {%- if s.image != blank -%}
-      {{ s.image | image_url: width: 2400 | image_tag:
-        loading: 'eager',
-        fetchpriority: 'high',
-        sizes: '100vw',
-        widths: '600, 900, 1200, 1600, 2000, 2400',
-        alt: s.heading | default: shop.name | escape }}
-    {%- else -%}
-      <div style="position:absolute;inset:0;background:radial-gradient(120% 120% at 50% 0%, #2a2216 0%, #0e0c0a 70%);"></div>
+<section id="lxh-{{ uid }}" class="lxh" aria-label="{{ s.heading | default: shop.name | escape }}">
+  <div class="lxh-bg"></div>
+  {%- if s.show_shader -%}<canvas class="lxh-shader" id="lxhc-{{ uid }}" aria-hidden="true"></canvas>{%- endif -%}
+
+  {%- if s.bottle_collection != blank and s.bottle_collection.products.size > 0 -%}
+    <div class="lxh-bottles" aria-hidden="true">
+      {%- for product in s.bottle_collection.products limit: 5 -%}
+        {%- if product.featured_image -%}
+          <div class="lxh-bottle">{{ product.featured_image | image_url: width: 400 | image_tag: loading: 'eager', widths: '160,240,320,400', alt: product.title | escape }}</div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  <div class="lxh-grain"></div>
+  <div class="lxh-vignette"></div>
+
+  <div class="lxh-inner">
+    {%- if s.eyebrow != blank -%}<span class="lxh-eyebrow">{{ s.eyebrow | escape }}</span>{%- endif -%}
+    {%- if s.heading != blank -%}<h2 class="lxh-mark" data-lxh-letters>{{ s.heading | escape }}</h2>{%- endif -%}
+    {%- if s.subline != blank -%}<span class="lxh-sub">{{ s.subline | escape }}</span>{%- endif -%}
+    {%- if s.line != blank -%}<p class="lxh-line">{{ s.line | escape }}</p>{%- endif -%}
+    {%- if s.button_label != blank or s.button_label_2 != blank -%}
+      <div class="lxh-cta">
+        {%- if s.button_label != blank -%}<a class="lxh-btn lxh-btn--gold" href="{{ s.button_link | default: '#' }}">{{ s.button_label | escape }}</a>{%- endif -%}
+        {%- if s.button_label_2 != blank -%}<a class="lxh-btn lxh-btn--ghost" href="{{ s.button_link_2 | default: '#' }}">{{ s.button_label_2 | escape }}</a>{%- endif -%}
+      </div>
     {%- endif -%}
   </div>
-
-  <div class="lux-hero__overlay"></div>
-  {%- if s.enable_sweep -%}<div class="lux-hero__sweep"></div>{%- endif -%}
-
-  <div class="lux-hero__inner">
-    <div class="lux-hero__content">
-      {%- if s.eyebrow != blank -%}
-        <span class="lux-hero__eyebrow" data-anim="1">{{ s.eyebrow | escape }}</span>
-      {%- endif -%}
-
-      {%- if s.heading != blank -%}
-        <h2 class="lux-hero__heading" data-anim="2">
-          {{ s.heading }}{% if s.heading_highlight != blank %} <span class="lux-hl">{{ s.heading_highlight }}</span>{% endif %}
-        </h2>
-      {%- endif -%}
-
-      {%- if s.text != blank -%}
-        <p class="lux-hero__text" data-anim="3">{{ s.text }}</p>
-      {%- endif -%}
-
-      {%- if s.button_label != blank or s.button_label_2 != blank -%}
-        <div class="lux-hero__cta" data-anim="4">
-          {%- if s.button_label != blank -%}
-            <a class="lux-btn lux-btn--gold" href="{{ s.button_link | default: '#' }}">{{ s.button_label | escape }}</a>
-          {%- endif -%}
-          {%- if s.button_label_2 != blank -%}
-            <a class="lux-btn lux-btn--ghost" href="{{ s.button_link_2 | default: '#' }}">{{ s.button_label_2 | escape }}</a>
-          {%- endif -%}
-        </div>
-      {%- endif -%}
-    </div>
-  </div>
 </section>
+
+<script>
+(function () {
+  var uid = {{ uid | json }};
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Letter-by-letter reveal
+  var mark = document.querySelector('#lxh-' + uid + ' [data-lxh-letters]');
+  if (mark && !reduce && !mark.dataset.split) {
+    mark.dataset.split = '1';
+    var txt = mark.textContent, frag = document.createDocumentFragment(), i = 0;
+    txt.split('').forEach(function (ch) {
+      if (ch === ' ') { frag.appendChild(document.createTextNode(' ')); return; }
+      var sp = document.createElement('span'); sp.className = 'ltr'; sp.textContent = ch;
+      sp.style.setProperty('--i', i++); frag.appendChild(sp);
+    });
+    mark.textContent = ''; mark.appendChild(frag);
+  }
+
+  // Gold WebGL light-wave shader
+  var canvas = document.getElementById('lxhc-' + uid);
+  if (!canvas) return;
+  var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  var vert = 'attribute vec3 position; void main(){ gl_Position = vec4(position,1.0); }';
+  var frag = [
+    'precision highp float;','uniform vec2 resolution;','uniform float time;',
+    'void main(){',
+    '  vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);',
+    '  p.y += 0.26;',
+    '  float d = length(p) * 0.06;',
+    '  float rx = p.x * (1.0 + d); float gx = p.x; float bx = p.x * (1.0 - d);',
+    '  float i1 = 0.020 / abs(p.y + sin((rx + time) * 1.0) * 0.5);',
+    '  float i2 = 0.020 / abs(p.y + sin((gx + time) * 1.0) * 0.5);',
+    '  float i3 = 0.020 / abs(p.y + sin((bx + time) * 1.0) * 0.5);',
+    '  vec3 hot = vec3(0.92,0.80,0.48); vec3 gold = vec3(0.70,0.55,0.24); vec3 deep = vec3(0.38,0.27,0.09);',
+    '  vec3 col = hot * i2 * 0.8 + gold * i1 * 0.5 + deep * i3 * 0.5;',
+    '  gl_FragColor = vec4(col, 1.0);',
+    '}'
+  ].join('\n');
+  function sh(t, src){ var x = gl.createShader(t); gl.shaderSource(x, src); gl.compileShader(x); return gl.getShaderParameter(x, gl.COMPILE_STATUS) ? x : null; }
+  var vs = sh(gl.VERTEX_SHADER, vert), fs = sh(gl.FRAGMENT_SHADER, frag);
+  if (!vs || !fs) return;
+  var pr = gl.createProgram(); gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr);
+  if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return;
+  gl.useProgram(pr);
+  var b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,0, 1,-1,0, -1,1,0, 1,-1,0, -1,1,0, 1,1,0]), gl.STATIC_DRAW);
+  var loc = gl.getAttribLocation(pr, 'position'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 3, gl.FLOAT, false, 0, 0);
+  var uRes = gl.getUniformLocation(pr, 'resolution'), uTime = gl.getUniformLocation(pr, 'time');
+  function size(){ var dpr = Math.min(window.devicePixelRatio || 1, 2); var w = Math.floor(canvas.clientWidth*dpr), h = Math.floor(canvas.clientHeight*dpr);
+    if (canvas.width !== w || canvas.height !== h){ canvas.width = w; canvas.height = h; gl.viewport(0,0,w,h); } gl.uniform2f(uRes, canvas.width, canvas.height); }
+  window.addEventListener('resize', size, { passive: true });
+  if (reduce) { size(); gl.uniform1f(uTime, 2.0); gl.drawArrays(gl.TRIANGLES, 0, 6); return; }
+  var t = 0, raf = null, vis = true;
+  function loop(){ size(); t += 0.01; gl.uniform1f(uTime, t); gl.drawArrays(gl.TRIANGLES, 0, 6); raf = vis ? requestAnimationFrame(loop) : null; }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (e){ vis = e[0].isIntersecting; if (vis && !raf) raf = requestAnimationFrame(loop); }, { threshold: 0 }).observe(canvas);
+  }
+  raf = requestAnimationFrame(loop);
+})();
+</script>
 
 {% schema %}
 {
@@ -232,54 +177,27 @@
   "tag": "section",
   "class": "lux-hero-section",
   "settings": [
-    { "type": "header", "content": "Media" },
-    { "type": "image_picker", "id": "image", "label": "Background image" },
-    {
-      "type": "select", "id": "focal_point", "label": "Image focal point", "default": "center",
-      "options": [
-        { "value": "center", "label": "Center" },
-        { "value": "top", "label": "Top" },
-        { "value": "bottom", "label": "Bottom" },
-        { "value": "left", "label": "Left" },
-        { "value": "right", "label": "Right" }
-      ]
-    },
-    { "type": "range", "id": "overlay_opacity", "label": "Overlay darkness", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 55 },
-    { "type": "checkbox", "id": "enable_sweep", "label": "Gold light sweep animation", "default": true },
+    { "type": "header", "content": "Background" },
+    { "type": "collection", "id": "bottle_collection", "label": "Bottle lineup collection", "info": "Up to 5 product images rise out of the dark behind the wordmark." },
+    { "type": "checkbox", "id": "show_shader", "label": "Animated gold light shader", "default": true },
+    { "type": "range", "id": "shader_opacity", "label": "Light intensity", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 55 },
     { "type": "header", "content": "Content" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Inspired by the icons" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Fragrance, reimagined" },
-    { "type": "text", "id": "heading_highlight", "label": "Highlighted word (gold italic)", "default": "reimagined" },
-    { "type": "textarea", "id": "text", "label": "Subheading", "default": "Luxury-grade scents that last — without the luxury markup." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Inspirerad av ikonerna" },
+    { "type": "text", "id": "heading", "label": "Wordmark", "default": "NOVA" },
+    { "type": "text", "id": "subline", "label": "Sub label", "default": "Extrait de Parfum · Made in the North" },
+    { "type": "text", "id": "line", "label": "Tagline (italic)", "default": "Lyxen i doften. Inte i priset." },
     { "type": "header", "content": "Buttons" },
-    { "type": "text", "id": "button_label", "label": "Primary button label", "default": "Shop the collection" },
-    { "type": "url", "id": "button_link", "label": "Primary button link" },
-    { "type": "text", "id": "button_label_2", "label": "Secondary button label", "default": "Find your scent" },
-    { "type": "url", "id": "button_link_2", "label": "Secondary button link" },
+    { "type": "text", "id": "button_label", "label": "Primary button", "default": "Handla parfymer" },
+    { "type": "url", "id": "button_link", "label": "Primary link" },
+    { "type": "text", "id": "button_label_2", "label": "Secondary button", "default": "Hitta din doft" },
+    { "type": "url", "id": "button_link_2", "label": "Secondary link" },
     { "type": "header", "content": "Layout" },
     {
-      "type": "select", "id": "height", "label": "Section height", "default": "large",
+      "type": "select", "id": "height", "label": "Section height", "default": "full",
       "options": [
-        { "value": "small", "label": "Small" },
         { "value": "medium", "label": "Medium" },
         { "value": "large", "label": "Large" },
         { "value": "full", "label": "Full screen" }
-      ]
-    },
-    {
-      "type": "select", "id": "text_alignment", "label": "Text alignment", "default": "center",
-      "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
-      ]
-    },
-    {
-      "type": "select", "id": "vertical_position", "label": "Vertical position", "default": "center",
-      "options": [
-        { "value": "top", "label": "Top" },
-        { "value": "center", "label": "Center" },
-        { "value": "bottom", "label": "Bottom" }
       ]
     }
   ],
