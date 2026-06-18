@@ -1,0 +1,33 @@
+{%- liquid assign s = section.settings -%}
+<div class="nova nova-section nova-section--alt">
+  <div class="nova-wrap">
+    <div class="nova-split">
+      <div class="nova-split__media" data-reveal>
+        {%- if s.image != blank -%}
+          {{ s.image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '500,800,1100', alt: s.heading | escape }}
+        {%- endif -%}
+      </div>
+      <div class="nova-split__body" data-reveal data-reveal-delay="1">
+        {%- if s.eyebrow != blank -%}<span class="nova-eyebrow">{{ s.eyebrow | escape }}</span>{%- endif -%}
+        <h2 class="nova-h3" style="margin-top:1rem;">{{ s.heading | escape }}</h2>
+        {%- if s.body != blank -%}<div>{{ s.body }}</div>{%- endif -%}
+        {%- if s.button_label != blank -%}<a href="{{ s.button_link | default: '#' }}" class="nova-btn nova-btn--gold">{{ s.button_label | escape }}</a>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Nova story split",
+  "tag": "section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Filosofin" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Samma själ som de stora husen. Utan lyxpåslaget." },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Vi studerar de mest ikoniska dofterna och återskapar deras karaktär i ren Extrait de Parfum, gjuten i Norden med hög andel parfymolja.</p><p>Resultatet är en doft som sitter kvar i timmar, i en flaska du faktiskt har råd att tömma.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Upptäck doftbiblioteket" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "presets": [{ "name": "Nova story split" }]
+}
+{% endschema %}

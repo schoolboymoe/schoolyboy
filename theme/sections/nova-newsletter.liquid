@@ -1,0 +1,33 @@
+{%- liquid assign s = section.settings -%}
+<div class="nova nova-section nova-news">
+  <div class="nova-wrap" data-reveal>
+    <h2 class="nova-h3">{{ s.heading | escape }}</h2>
+    {%- if s.body != blank -%}<p>{{ s.body | escape }}</p>{%- endif -%}
+    {%- form 'customer' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div class="nova-news" style="display:contents;">
+        <div class="nova-news-form" style="display:flex;gap:0.6rem;max-width:440px;margin:1.8rem auto 0;">
+          <input class="nova-field" type="email" name="contact[email]" placeholder="{{ s.placeholder | escape }}" aria-label="E-post" required>
+          <button class="nova-btn nova-btn--gold" type="submit">{{ s.button_label | escape }}</button>
+        </div>
+      </div>
+      {%- if form.posted_successfully? -%}
+        <p style="color:var(--nova-gold-soft);margin-top:1rem;">{{ s.success | escape }}</p>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Nova newsletter",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Bli först med nya släpp" },
+    { "type": "text", "id": "body", "label": "Body", "default": "Få 10 procent på din första order och tidig tillgång till begränsade dofter." },
+    { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "Din e-postadress" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Gå med" },
+    { "type": "text", "id": "success", "label": "Success message", "default": "Tack! Kolla din inkorg för rabattkoden." }
+  ],
+  "presets": [{ "name": "Nova newsletter" }]
+}
+{% endschema %}

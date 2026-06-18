@@ -97,8 +97,14 @@
     {{ content_for_header }}
     {{ settings.additional_head }}
 
-    {%- comment -%} Nova Scents luxury polish layer — loaded last so it overrides theme.css {%- endcomment -%}
+    {%- comment -%} Nova Scents luxury polish layer, loaded last so it overrides theme.css {%- endcomment -%}
     {{ 'custom.css' | asset_url | stylesheet_tag }}
+
+    {%- comment -%} Nova homepage design system + prototype fonts (Cormorant Garamond + Jost) {%- endcomment -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    {{ 'nova.css' | asset_url | stylesheet_tag }}
 
     {% liquid
       assign menu_font_400 = settings.type_menu_font | font_modify: 'weight', '400'

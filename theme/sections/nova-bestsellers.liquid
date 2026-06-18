@@ -1,0 +1,61 @@
+{%- liquid
+  assign s = section.settings
+  assign coll = s.collection
+-%}
+<div class="nova nova-section">
+  <div class="nova-wrap">
+    <div class="nova-shead" data-reveal>
+      <h2 class="nova-h2">{{ s.heading | escape }}</h2>
+      {%- if s.subheading != blank -%}<p>{{ s.subheading | escape }}</p>{%- endif -%}
+    </div>
+    <div class="nova-grid">
+      {%- if coll != blank and coll.products.size > 0 -%}
+        {%- for product in coll.products limit: s.count -%}
+          <article class="nova-card" data-reveal>
+            <a href="{{ product.url }}" class="nova-card__media">
+              {%- if product.featured_image -%}
+                {{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '300,450,600,700', alt: product.title | escape }}
+              {%- else -%}
+                <span class="nova-card__ph">{{ product.title | escape }}</span>
+              {%- endif -%}
+              {%- if product.compare_at_price > product.price -%}<span class="nova-card__badge">Kampanj</span>{%- endif -%}
+              <span class="nova-card__quick"><span class="nova-btn nova-btn--gold nova-btn--block">Visa parfym</span></span>
+            </a>
+            <div class="nova-card__info">
+              <h3 class="nova-card__title">{{ product.title | escape }}</h3>
+              {%- if product.type != blank -%}<p class="nova-card__notes">{{ product.type | escape }}</p>{%- endif -%}
+              <div class="nova-card__row"><span class="nova-stars">★★★★★</span><span class="nova-card__price">{{ product.price | money }}</span></div>
+            </div>
+          </article>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..4) -%}
+          <article class="nova-card" data-reveal>
+            <div class="nova-card__media"><span class="nova-card__ph">NOVA</span></div>
+            <div class="nova-card__info"><h3 class="nova-card__title">Välj en kollektion</h3><p class="nova-card__notes">Sektionsinställningar</p></div>
+          </article>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+    {%- if s.button_label != blank -%}
+      <div style="text-align:center; margin-top:3rem;" data-reveal>
+        <a href="{{ s.button_link | default: '#' }}" class="nova-btn nova-btn--ghost">{{ s.button_label | escape }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Nova bestsellers",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Mest älskade dofter" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Signaturdofter gjutna som rena Extrait de Parfum." },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "count", "label": "Products", "min": 2, "max": 8, "step": 1, "default": 4 },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Se alla parfymer" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "presets": [{ "name": "Nova bestsellers" }]
+}
+{% endschema %}

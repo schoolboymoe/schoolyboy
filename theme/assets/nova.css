@@ -1,0 +1,160 @@
+/* ==========================================================================
+   NOVA homepage design system (ported 1:1 from the approved prototype).
+   Everything is scoped under .nova so it never collides with Eurus styles.
+   Loaded after custom.css in layout/theme.liquid, alongside the Cormorant
+   Garamond + Jost web fonts. Dark luxury, single gold accent, zero em-dashes.
+   ========================================================================== */
+
+/* Match the prototype typography across the whole storefront. These override
+   the theme's font tokens (set without !important in css-variables), so the
+   hero and all sections render in Cormorant + Jost. */
+:root {
+  --font-heading-family: "Cormorant Garamond", Georgia, serif;
+  --font-body-family: "Jost", "Helvetica Neue", Arial, sans-serif;
+  --nova-serif: "Cormorant Garamond", Georgia, serif;
+  --nova-sans: "Jost", "Helvetica Neue", Arial, sans-serif;
+  --nova-bg: #0b0a09;
+  --nova-bg1: #110f0d;
+  --nova-line: rgba(214,197,160,0.14);
+  --nova-line2: rgba(214,197,160,0.28);
+  --nova-cream: #f4efe4;
+  --nova-muted: #b3a892;
+  --nova-muted2: #8c8472;
+  --nova-gold: #c9a44a;
+  --nova-gold-soft: #e3c878;
+  --nova-gold-deep: #a98432;
+  --nova-gold-tint: rgba(201,164,74,0.12);
+  --nova-ease: cubic-bezier(0.22,1,0.36,1);
+  --nova-slow: 640ms;
+}
+
+.nova { font-family: var(--nova-sans); color: var(--nova-cream); font-weight: 300; line-height: 1.6; }
+.nova *, .nova *::before, .nova *::after { box-sizing: border-box; }
+.nova h1, .nova h2, .nova h3, .nova h4 { font-family: var(--nova-serif); font-weight: 500; line-height: 1.05; letter-spacing: 0; text-wrap: balance; margin: 0; }
+.nova ::selection { background: var(--nova-gold-tint); color: var(--nova-gold-soft); }
+.nova img { max-width: 100%; display: block; }
+.nova a { color: inherit; text-decoration: none; }
+
+.nova-wrap { width: 100%; max-width: 1320px; margin-inline: auto; padding-inline: clamp(1.1rem, 4vw, 3.5rem); }
+.nova-section { padding-block: clamp(4rem, 10vw, 8.5rem); background: var(--nova-bg); }
+.nova-section--alt { background: var(--nova-bg1); border-block: 1px solid var(--nova-line); }
+.nova-eyebrow { display: inline-block; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--nova-gold); font-weight: 500; }
+.nova-h2 { font-size: clamp(2.1rem, 5vw, 3.5rem); }
+.nova-h3 { font-size: clamp(1.6rem, 3.2vw, 2.4rem); }
+
+.nova-shead { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; margin-bottom: 3rem; }
+.nova-shead h2 { max-width: 16ch; }
+.nova-shead p { color: var(--nova-muted); max-width: 40ch; }
+
+/* Buttons */
+.nova-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+  font-family: var(--nova-sans); font-weight: 500; font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 1rem 2.2rem; border-radius: 999px; white-space: nowrap; cursor: pointer;
+  transition: transform 180ms var(--nova-ease), box-shadow 180ms var(--nova-ease), color 180ms var(--nova-ease), border-color 180ms var(--nova-ease); }
+.nova-btn--gold { background: linear-gradient(135deg, var(--nova-gold-soft), var(--nova-gold)); color: #17120a; }
+.nova-btn--gold:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(201,164,74,0.32); }
+.nova-btn--ghost { border: 1px solid var(--nova-line2); color: var(--nova-cream); }
+.nova-btn--ghost:hover { transform: translateY(-2px); border-color: var(--nova-gold); color: var(--nova-gold-soft); }
+.nova-btn--block { width: 100%; }
+
+/* Trust strip */
+.nova-trust { display: grid; grid-template-columns: repeat(4, 1fr); border-block: 1px solid var(--nova-line); }
+.nova-trust__i { display: flex; align-items: center; justify-content: center; gap: 0.7rem; text-align: center;
+  padding: 1.3rem 1rem; font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--nova-muted);
+  border-left: 1px solid var(--nova-line); }
+.nova-trust__i:first-child { border-left: none; }
+.nova-trust__i svg { width: 18px; height: 18px; color: var(--nova-gold); flex: none; }
+
+/* Product grid + cards */
+.nova-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1rem, 2vw, 1.8rem); }
+.nova-card { position: relative; }
+.nova-card__media { position: relative; aspect-ratio: 3/4; border-radius: 4px; overflow: hidden;
+  background: radial-gradient(80% 70% at 50% 20%, #211b12 0%, #0d0b09 70%); border: 1px solid var(--nova-line);
+  display: grid; place-items: center; }
+.nova-card__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform var(--nova-slow) var(--nova-ease); }
+.nova-card:hover .nova-card__media img { transform: scale(1.05); }
+.nova-card__ph { font-family: var(--nova-serif); font-size: 1.8rem; letter-spacing: 0.08em; color: var(--nova-gold); text-align: center; }
+.nova-card__badge { position: absolute; top: 12px; left: 12px; z-index: 2; font-size: 0.58rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--nova-gold-soft); border: 1px solid var(--nova-line2); background: rgba(7,6,5,0.6);
+  backdrop-filter: blur(6px); padding: 4px 9px; border-radius: 999px; }
+.nova-card__quick { position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 2; opacity: 0; transform: translateY(10px);
+  transition: opacity var(--nova-slow) var(--nova-ease), transform var(--nova-slow) var(--nova-ease); }
+.nova-card:hover .nova-card__quick { opacity: 1; transform: none; }
+.nova-card__info { padding-top: 1rem; }
+.nova-card__title { font-family: var(--nova-serif); font-size: 1.35rem; }
+.nova-card__notes { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nova-muted2); margin-top: 0.2rem; }
+.nova-card__row { display: flex; align-items: center; justify-content: space-between; margin-top: 0.55rem; }
+.nova-card__price { color: var(--nova-gold-soft); font-size: 0.95rem; }
+.nova-stars { color: var(--nova-gold); font-size: 0.8rem; letter-spacing: 1px; }
+
+/* Split editorial */
+.nova-split { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(1.5rem, 5vw, 5rem); align-items: center; }
+.nova-split__media { aspect-ratio: 4/5; border-radius: 4px; overflow: hidden; border: 1px solid var(--nova-line);
+  background: radial-gradient(70% 60% at 60% 30%, #241c12, #0c0a08); }
+.nova-split__media img { width: 100%; height: 100%; object-fit: cover; }
+.nova-split__body h2 { margin-bottom: 1.3rem; }
+.nova-split__body p { color: var(--nova-muted); margin-bottom: 1.1rem; max-width: 52ch; }
+.nova-split__body .nova-btn { margin-top: 1rem; }
+
+/* Bundle band */
+.nova-bundle { text-align: center; border-block: 1px solid var(--nova-line);
+  background: radial-gradient(90% 140% at 50% 0%, #211a10 0%, var(--nova-bg) 60%); }
+.nova-bundle h2 { font-size: clamp(2.6rem, 7vw, 5rem); margin: 0.8rem auto 1rem; }
+.nova-bundle p { color: var(--nova-muted); max-width: 46ch; margin: 0 auto 2rem; }
+.nova-kicker { display: block; font-size: 0.8rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--nova-gold); }
+
+/* Bento scent finder */
+.nova-bento { display: grid; grid-template-columns: 1.4fr 1fr 1fr; grid-auto-rows: 220px; gap: clamp(0.8rem, 1.6vw, 1.4rem); }
+.nova-tile { position: relative; border-radius: 4px; overflow: hidden; border: 1px solid var(--nova-line);
+  display: flex; align-items: flex-end; padding: 1.4rem; transition: border-color var(--nova-slow); }
+.nova-tile:hover { border-color: var(--nova-line2); }
+.nova-tile:nth-child(1) { grid-row: span 2; background: radial-gradient(80% 80% at 30% 20%, #2a2113, #0c0a08); }
+.nova-tile:nth-child(2) { background: radial-gradient(90% 90% at 70% 30%, #241b22, #0c0a08); }
+.nova-tile:nth-child(3) { background: radial-gradient(90% 90% at 40% 30%, #122026, #0c0a08); }
+.nova-tile:nth-child(4) { background: radial-gradient(90% 90% at 60% 40%, #251a12, #0c0a08); }
+.nova-tile:nth-child(5) { background: radial-gradient(90% 90% at 50% 30%, #1d1d14, #0c0a08); }
+.nova-tile h3 { font-size: 1.5rem; }
+.nova-tile span { display: block; font-family: var(--nova-sans); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nova-muted); margin-bottom: 0.3rem; }
+.nova-tile__glow { position: absolute; inset: 0; background: radial-gradient(60% 60% at 50% 120%, var(--nova-gold-tint), transparent 70%); opacity: 0; transition: opacity var(--nova-slow); }
+.nova-tile:hover .nova-tile__glow { opacity: 1; }
+
+/* Reviews */
+.nova-reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.6rem); }
+.nova-quote { border: 1px solid var(--nova-line); border-radius: 4px; padding: 1.8rem; background: var(--nova-bg1); }
+.nova-quote .nova-stars { margin-bottom: 0.9rem; display: block; }
+.nova-quote p { font-family: var(--nova-serif); font-style: italic; font-size: 1.18rem; color: var(--nova-cream); margin-bottom: 1.2rem; line-height: 1.4; }
+.nova-quote cite { font-style: normal; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--nova-muted2); }
+
+/* Newsletter */
+.nova-news { text-align: center; }
+.nova-news p { color: var(--nova-muted); max-width: 42ch; margin: 1rem auto 0; }
+.nova-news form { display: flex; gap: 0.6rem; max-width: 440px; margin: 1.8rem auto 0; }
+.nova-field { flex: 1; background: #181512; border: 1px solid var(--nova-line2); color: var(--nova-cream);
+  border-radius: 999px; padding: 0.95rem 1.3rem; font-family: var(--nova-sans); font-size: 0.85rem; }
+.nova-field::placeholder { color: var(--nova-muted2); }
+.nova-field:focus { outline: 2px solid var(--nova-gold); outline-offset: 2px; border-color: transparent; }
+
+/* Reveal (uses .is-revealed added by custom.js) */
+.nova [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity var(--nova-slow) var(--nova-ease), transform var(--nova-slow) var(--nova-ease); }
+.nova [data-reveal].is-revealed { opacity: 1; transform: none; }
+.nova [data-reveal].d1 { transition-delay: 90ms; }
+.nova [data-reveal].d2 { transition-delay: 180ms; }
+.nova [data-reveal].d3 { transition-delay: 270ms; }
+
+@media (max-width: 1000px) {
+  .nova-grid { grid-template-columns: repeat(2, 1fr); }
+  .nova-reviews { grid-template-columns: 1fr; }
+  .nova-bento { grid-template-columns: 1fr 1fr; grid-auto-rows: 200px; }
+  .nova-tile:nth-child(1) { grid-row: span 1; }
+}
+@media (max-width: 760px) {
+  .nova-split { grid-template-columns: 1fr; }
+  .nova-split__media { order: -1; }
+  .nova-trust { grid-template-columns: 1fr 1fr; }
+  .nova-trust__i:nth-child(3) { border-left: none; }
+  .nova-trust__i { border-top: 1px solid var(--nova-line); }
+  .nova-shead { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nova [data-reveal] { opacity: 1 !important; transform: none !important; }
+}

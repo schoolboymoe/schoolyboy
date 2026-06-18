@@ -1,0 +1,51 @@
+{%- liquid assign s = section.settings -%}
+<div class="nova nova-section">
+  <div class="nova-wrap">
+    <div class="nova-shead" data-reveal>
+      <h2 class="nova-h2">{{ s.heading | escape }}</h2>
+      {%- if s.subheading != blank -%}<p>{{ s.subheading | escape }}</p>{%- endif -%}
+    </div>
+    <div class="nova-bento">
+      {%- for block in section.blocks -%}
+        <a class="nova-tile" href="{{ block.settings.link | default: '#' }}" data-reveal {{ block.shopify_attributes }}>
+          <div class="nova-tile__glow"></div>
+          <div>
+            {%- if block.settings.label != blank -%}<span>{{ block.settings.label | escape }}</span>{%- endif -%}
+            <h3>{{ block.settings.title | escape }}</h3>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Nova scent finder",
+  "tag": "section",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Hitta din karaktär" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Välj en stämning, så guidar vi dig till doften som matchar." }
+  ],
+  "blocks": [
+    {
+      "type": "tile", "name": "Tile",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Kväll" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Oud & Läder" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Nova scent finder",
+    "blocks": [
+      { "type": "tile", "settings": { "label": "Kväll", "title": "Oud & Läder" } },
+      { "type": "tile", "settings": { "label": "Sensuell", "title": "Söt & Vanilj" } },
+      { "type": "tile", "settings": { "label": "Frisk", "title": "Citrus & Hav" } },
+      { "type": "tile", "settings": { "label": "Vardag", "title": "Aromatisk" } },
+      { "type": "tile", "settings": { "label": "Värme", "title": "Ambra & Krydda" } }
+    ]
+  }]
+}
+{% endschema %}
