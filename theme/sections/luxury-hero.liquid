@@ -27,6 +27,8 @@
     justify-content: center; overflow: hidden; isolation: isolate; background: #0b0a09; text-align: center; }
   #lxh-{{ uid }} .lxh-bg { position: absolute; inset: 0; z-index: -4;
     background: radial-gradient(120% 90% at 50% -10%, #2b2113 0%, #0b0a09 58%); }
+  #lxh-{{ uid }} .lxh-backdrop { position: absolute; inset: 0; z-index: -4; }
+  #lxh-{{ uid }} .lxh-backdrop img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
   #lxh-{{ uid }} .lxh-shader { position: absolute; inset: 0; z-index: -3; width: 100%; height: 100%;
     display: block; opacity: {{ s.shader_opacity | divided_by: 100.0 }}; }
   #lxh-{{ uid }} .lxh-bottles { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
@@ -80,6 +82,7 @@
 
 <section id="lxh-{{ uid }}" class="lxh" aria-label="{{ s.heading | default: shop.name | escape }}">
   <div class="lxh-bg"></div>
+  {%- if s.backdrop_image != blank -%}<div class="lxh-backdrop">{{ s.backdrop_image | image_url: width: 2800 | image_tag: loading: 'eager', sizes: '100vw', widths: '1200,1800,2400,2800', alt: '' }}</div>{%- endif -%}
   {%- if s.show_shader -%}<canvas class="lxh-shader" id="lxhc-{{ uid }}" aria-hidden="true"></canvas>{%- endif -%}
 
   {%- if s.bottle_collection != blank and s.bottle_collection.products.size > 0 -%}
@@ -178,6 +181,7 @@
   "class": "lux-hero-section",
   "settings": [
     { "type": "header", "content": "Background" },
+    { "type": "image_picker", "id": "backdrop_image", "label": "Backdrop image", "info": "Optional still image (e.g. the generated dark-gold backdrop) behind the animated shader." },
     { "type": "collection", "id": "bottle_collection", "label": "Bottle lineup collection", "info": "Up to 5 product images rise out of the dark behind the wordmark." },
     { "type": "checkbox", "id": "show_shader", "label": "Animated gold light shader", "default": true },
     { "type": "range", "id": "shader_opacity", "label": "Light intensity", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 55 },
