@@ -1,0 +1,483 @@
+/* ============================================================
+   NOVA SCENTS - Nocturne brand layer
+   Loaded after css-variables so its :root tokens win.
+   Type: Bodoni Moda (display) / Archivo (UI + body)
+   Canvas: botanical ink. One accent: amber.
+   ============================================================ */
+
+@font-face {
+  font-family: 'Bodoni Moda';
+  src: url('nova-serif.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Bodoni Moda';
+  src: url('nova-serif-italic.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Archivo';
+  src: url('nova-sans.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Archivo';
+  src: url('nova-sans-italic.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* font tokens: override the picker-driven variables */
+  --font-heading-family: 'Bodoni Moda', 'Didot', Georgia, serif;
+  --font-heading-weight: 460;
+  --font-heading-style: normal;
+  --font-heading-highlight: 'Bodoni Moda', 'Didot', Georgia, serif;
+  --font-heading-highlight-style: italic;
+  --font-heading-highlight-weight: 430;
+  --font-body-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-body-weight: 400;
+  --font-body-style: normal;
+  --font-menu: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-menu-weight: 500;
+  --font-menu-style: normal;
+  --font-button: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-button-weight: 540;
+  --font-button-style: normal;
+
+  /* nova private tokens */
+  --nova-ink: 12, 16, 13;
+  --nova-ink-2: 18, 23, 19;
+  --nova-ink-3: 26, 33, 28;
+  --nova-bone: 237, 235, 227;
+  --nova-body: 199, 201, 191;
+  --nova-muted: 151, 156, 146;
+  --nova-amber: 224, 164, 60;
+  --nova-amber-deep: 196, 133, 27;
+  --nova-hairline: rgba(237, 235, 227, 0.14);
+  --nova-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --nova-section: clamp(4.5rem, 9vw, 8.5rem);
+}
+
+/* ---------- global typography refinements ---------- */
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, .h0, .h1, .h2, .h3 {
+  font-optical-sizing: auto;
+  line-height: 1.05;
+  letter-spacing: 0.002em;
+}
+
+/* product card titles carry the display serif */
+.card__heading .x-card-title {
+  font-family: var(--font-heading-family);
+  font-weight: 470;
+  font-size: 1.3rem;
+  line-height: 1.15;
+}
+
+.price {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- buttons: sharp, tracked caps ---------- */
+.button:not(.button-play):not(.shopify-payment-button__button),
+button.button,
+a.button {
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  transition-timing-function: var(--nova-ease);
+}
+.button:not(.button-play):active {
+  transform: translateY(1px);
+}
+
+/* ---------- header: tracked caps nav ---------- */
+header nav a,
+header .header__menu summary,
+header details summary span {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+/* ---------- focus + selection in brand amber ---------- */
+:focus-visible {
+  outline: 2px solid rgb(var(--nova-amber));
+  outline-offset: 2px;
+}
+::selection {
+  background: rgba(var(--nova-amber), 0.28);
+}
+
+/* ============================================================
+   NOVA custom sections (nova-hero / nova-editorial /
+   nova-spotlight / nova-quote)
+   ============================================================ */
+
+.nova-label {
+  font-family: var(--font-body-family);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgb(var(--nova-muted));
+}
+
+.nova-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 3.25rem;
+  padding: 0 2.1rem;
+  font-family: var(--font-button);
+  font-size: 0.78rem;
+  font-weight: 540;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color 0.25s var(--nova-ease), border-color 0.25s var(--nova-ease),
+    color 0.25s var(--nova-ease), transform 0.15s var(--nova-ease);
+}
+.nova-btn:active { transform: translateY(1px); }
+.nova-btn--solid {
+  background: rgb(var(--nova-amber));
+  color: #171204;
+  border-color: rgb(var(--nova-amber));
+}
+.nova-btn--solid:hover {
+  background: rgb(var(--nova-amber-deep));
+  border-color: rgb(var(--nova-amber-deep));
+}
+.nova-btn--ghost {
+  background: rgba(var(--nova-ink), 0.25);
+  color: rgb(var(--nova-bone));
+  border-color: rgba(var(--nova-bone), 0.45);
+  backdrop-filter: blur(6px);
+}
+.nova-btn--ghost:hover {
+  border-color: rgb(var(--nova-bone));
+  background: rgba(var(--nova-bone), 0.08);
+}
+
+.nova-text-link {
+  font-family: var(--font-body-family);
+  font-size: 0.78rem;
+  font-weight: 540;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgb(var(--colors-heading));
+  text-decoration: none;
+  border-bottom: 1px solid rgb(var(--nova-amber));
+  padding-bottom: 0.35rem;
+  transition: color 0.25s var(--nova-ease);
+}
+.nova-text-link:hover { color: rgb(var(--nova-amber)); }
+
+/* ---------- nova hero ---------- */
+.nova-hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: flex-end;
+  isolation: isolate;
+  overflow: hidden;
+  background: rgb(var(--nova-ink));
+}
+.nova-hero__media,
+.nova-hero__media picture {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+.nova-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 68% 50%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .nova-hero__media img {
+    animation: nova-hero-drift 14s var(--nova-ease) forwards;
+    transform-origin: 62% 55%;
+  }
+  @keyframes nova-hero-drift {
+    from { transform: scale(1.09); }
+    to { transform: scale(1); }
+  }
+}
+.nova-hero__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(var(--nova-ink), 0.92) 0%, rgba(var(--nova-ink), 0.25) 38%, rgba(var(--nova-ink), 0) 60%),
+    linear-gradient(100deg, rgba(var(--nova-ink), 0.55) 0%, rgba(var(--nova-ink), 0) 55%);
+}
+.nova-hero__wrap {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 4rem);
+}
+.nova-hero__content {
+  max-width: 880px;
+  padding-block: clamp(3rem, 7vw, 5.5rem);
+}
+.nova-hero__heading {
+  font-family: var(--font-heading-family);
+  font-optical-sizing: auto;
+  font-size: clamp(2.7rem, 6.2vw, 5.9rem);
+  font-weight: 440;
+  line-height: 0.98;
+  letter-spacing: 0.002em;
+  color: rgb(var(--nova-bone));
+  margin: 0 0 1.4rem;
+  text-wrap: balance;
+}
+.nova-hero__heading em {
+  font-style: italic;
+  font-weight: 420;
+  line-height: 1.1;
+  padding-bottom: 0.06em;
+}
+.nova-hero__text {
+  font-size: clamp(1rem, 1.35vw, 1.15rem);
+  line-height: 1.65;
+  max-width: 44ch;
+  color: rgb(var(--nova-body));
+  margin: 0 0 2.2rem;
+}
+.nova-hero__ctas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .nova-reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    animation: nova-rise 0.9s var(--nova-ease) forwards;
+  }
+  .nova-reveal.d1 { animation-delay: 0.15s; }
+  .nova-reveal.d2 { animation-delay: 0.3s; }
+  @keyframes nova-rise {
+    to { opacity: 1; transform: none; }
+  }
+}
+@media (max-width: 767px) {
+  .nova-hero__media img { object-position: 62% 50%; }
+}
+
+/* ---------- nova editorial split ---------- */
+.nova-editorial {
+  background: rgb(var(--colors-background));
+  padding-block: var(--nova-section);
+}
+.nova-editorial__wrap {
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 4rem);
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: center;
+}
+.nova-editorial__media {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: rgb(var(--nova-ink-3));
+}
+.nova-editorial__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.nova-editorial__heading {
+  font-family: var(--font-heading-family);
+  font-size: clamp(2.1rem, 3.8vw, 3.6rem);
+  font-weight: 450;
+  line-height: 1.05;
+  color: rgb(var(--colors-heading));
+  margin: 0 0 1.5rem;
+  text-wrap: balance;
+}
+.nova-editorial__text {
+  max-width: 52ch;
+  line-height: 1.65;
+  color: rgb(var(--colors-text));
+  margin: 0 0 2.2rem;
+}
+@media (max-width: 767px) {
+  .nova-editorial__wrap { grid-template-columns: 1fr; }
+}
+
+/* ---------- nova spotlight ---------- */
+.nova-spotlight {
+  background: rgb(var(--nova-ink-2));
+  border-block: 1px solid var(--nova-hairline);
+  padding-block: var(--nova-section);
+}
+.nova-spotlight__wrap {
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 4rem);
+  display: grid;
+  grid-template-columns: 6fr 5fr;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: center;
+}
+.nova-spotlight .nova-label {
+  display: block;
+  margin-bottom: 1rem;
+}
+.nova-spotlight__heading {
+  font-family: var(--font-heading-family);
+  font-size: clamp(2.1rem, 3.8vw, 3.6rem);
+  font-weight: 450;
+  line-height: 1.05;
+  color: rgb(var(--nova-bone));
+  margin: 0;
+}
+.nova-spotlight__notes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-block: 1px solid var(--nova-hairline);
+  margin-block: 2.2rem;
+}
+.nova-spotlight__note {
+  padding: 1.4rem 1.2rem;
+}
+.nova-spotlight__note + .nova-spotlight__note {
+  border-left: 1px solid var(--nova-hairline);
+}
+.nova-spotlight__note .nova-label {
+  margin-bottom: 0.55rem;
+}
+.nova-spotlight__note strong {
+  font-family: var(--font-heading-family);
+  font-weight: 470;
+  font-size: 1.12rem;
+  line-height: 1.35;
+  color: rgb(var(--nova-bone));
+  display: block;
+}
+.nova-spotlight__price {
+  font-size: 1.05rem;
+  color: rgb(var(--nova-bone));
+  font-variant-numeric: tabular-nums;
+  margin: 0 0 2rem;
+}
+.nova-spotlight__media {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: rgb(var(--nova-ink-3));
+}
+.nova-spotlight__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (max-width: 767px) {
+  .nova-spotlight__wrap { grid-template-columns: 1fr; }
+  .nova-spotlight__notes { grid-template-columns: 1fr; }
+  .nova-spotlight__note + .nova-spotlight__note {
+    border-left: 0;
+    border-top: 1px solid var(--nova-hairline);
+  }
+}
+
+/* ---------- nova quote ---------- */
+.nova-quote {
+  background: rgb(var(--colors-background));
+  padding-block: var(--nova-section);
+}
+.nova-quote__wrap {
+  max-width: 920px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 4rem);
+  text-align: center;
+}
+.nova-quote blockquote {
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  font-weight: 430;
+  line-height: 1.3;
+  color: rgb(var(--nova-bone));
+  text-wrap: balance;
+  margin: 0;
+}
+.nova-quote cite {
+  display: block;
+  font-style: normal;
+  font-size: 0.85rem;
+  color: rgb(var(--nova-muted));
+  letter-spacing: 0.08em;
+  margin-top: 1.8rem;
+}
+
+/* ---------- nova marquee ---------- */
+.nova-marquee {
+  background: rgb(var(--colors-background));
+  border-block: 1px solid var(--nova-hairline);
+  overflow: hidden;
+  padding-block: 1.6rem;
+  user-select: none;
+}
+.nova-marquee__track {
+  display: flex;
+  width: max-content;
+}
+.nova-marquee__seq {
+  display: flex;
+  flex-shrink: 0;
+}
+.nova-marquee span {
+  font-family: var(--font-heading-family);
+  font-size: clamp(1.6rem, 2.6vw, 2.5rem);
+  font-weight: 430;
+  color: rgb(var(--nova-bone));
+  padding-inline: 1.6rem;
+  white-space: nowrap;
+}
+.nova-marquee span:nth-child(even) {
+  font-style: italic;
+  color: rgb(var(--nova-muted));
+}
+@media (prefers-reduced-motion: no-preference) {
+  .nova-marquee__track {
+    animation: nova-slide 38s linear infinite;
+  }
+  @keyframes nova-slide {
+    to { transform: translateX(-50%); }
+  }
+}
+
+/* ---------- scroll reveal for custom sections ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .nova-io {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s var(--nova-ease), transform 0.8s var(--nova-ease);
+  }
+  .nova-io.in {
+    opacity: 1;
+    transform: none;
+  }
+}

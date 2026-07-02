@@ -1,142 +1,169 @@
 {
   "sections": {
-    "luxury_hero_main": {
-      "type": "luxury-hero",
+    "nova_hero": {
+      "type": "nova-hero",
       "settings": {
-        "bottle_collection": "all",
-        "show_shader": true,
-        "shader_opacity": 55,
-        "eyebrow": "Inspirerad av ikonerna",
-        "heading": "NOVA",
-        "subline": "Extrait de Parfum · Made in the North",
-        "line": "Lyxen i doften. Inte i priset.",
-        "button_label": "Handla parfymer",
-        "button_link": "shopify://collections/all",
-        "button_label_2": "Hitta din doft",
-        "button_link_2": "",
-        "height": "full"
+        "image_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3FNhDOTSt2KtPsYKUIj0STNcqCb/hf_20260702_224255_9412d4cf-b3b4-49ea-b6f7-793eca75dcfd.png",
+        "image_url_mobile": "https://d8j0ntlcm91z4.cloudfront.net/user_3FNhDOTSt2KtPsYKUIj0STNcqCb/hf_20260702_224259_e9190326-4035-4646-b764-9e3b3c183c8e.png",
+        "image_alt": "Nova Scents extrait de parfum på vulkansten i varmt sidoljus",
+        "heading": "Parfym för de mörka timmarna.",
+        "italic_word": "mörka",
+        "text": "Extraits de parfum inspirerade av världens mest eftertraktade dofter. Minst åtta timmar på huden.",
+        "cta_label": "Handla parfymer",
+        "cta_link": "shopify:\/\/collections\/vara-produkter"
       }
     },
-    "nova_trust": {
-      "type": "nova-trust",
-      "settings": {}
+    "nova_marquee": {
+      "type": "nova-marquee",
+      "blocks": {
+        "word_1": { "type": "word", "settings": { "text": "Bärnsten" } },
+        "word_2": { "type": "word", "settings": { "text": "Rök" } },
+        "word_3": { "type": "word", "settings": { "text": "Vanilj" } },
+        "word_4": { "type": "word", "settings": { "text": "Oud" } },
+        "word_5": { "type": "word", "settings": { "text": "Bergamott" } },
+        "word_6": { "type": "word", "settings": { "text": "Vetiver" } },
+        "word_7": { "type": "word", "settings": { "text": "Damascusros" } },
+        "word_8": { "type": "word", "settings": { "text": "Tobak" } }
+      },
+      "block_order": ["word_1", "word_2", "word_3", "word_4", "word_5", "word_6", "word_7", "word_8"]
     },
     "nova_bestsellers": {
-      "type": "nova-bestsellers",
-      "settings": {
-        "collection": "all",
-        "count": 4,
-        "button_link": "shopify://collections/all"
-      }
-    },
-    "nova_split": {
-      "type": "nova-split",
-      "settings": {}
-    },
-    "nova_bundle": {
-      "type": "nova-bundle",
-      "settings": {
-        "button_link": "shopify://collections/all"
-      }
-    },
-    "nova_scentfinder": {
-      "type": "nova-scentfinder",
+      "type": "featured-collection",
       "blocks": {
-        "t0": {
-          "type": "tile",
+        "collection_1": {
+          "type": "collection",
           "settings": {
-            "label": "Kväll",
-            "title": "Oud & Läder",
-            "link": "shopify://collections/all"
-          }
-        },
-        "t1": {
-          "type": "tile",
-          "settings": {
-            "label": "Sensuell",
-            "title": "Söt & Vanilj",
-            "link": "shopify://collections/all"
-          }
-        },
-        "t2": {
-          "type": "tile",
-          "settings": {
-            "label": "Frisk",
-            "title": "Citrus & Hav",
-            "link": "shopify://collections/all"
-          }
-        },
-        "t3": {
-          "type": "tile",
-          "settings": {
-            "label": "Vardag",
-            "title": "Aromatisk",
-            "link": "shopify://collections/all"
-          }
-        },
-        "t4": {
-          "type": "tile",
-          "settings": {
-            "label": "Värme",
-            "title": "Ambra & Krydda",
-            "link": "shopify://collections/all"
+            "collection": "bastsaljare",
+            "show_quickview": true,
+            "show_vendor": false
           }
         }
       },
-      "block_order": [
-        "t0",
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "settings": {}
+      "block_order": ["collection_1"],
+      "settings": {
+        "title": "Bästsäljare",
+        "heading_alignment": "left",
+        "show_view_all": true,
+        "columns_desktop": 4,
+        "rows_desktop": 1,
+        "full_width": false
+      }
     },
-    "nova_reviews": {
-      "type": "nova-reviews",
+    "nova_editorial": {
+      "type": "nova-editorial",
+      "settings": {
+        "image_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3FNhDOTSt2KtPsYKUIj0STNcqCb/hf_20260702_222907_bcae5400-d410-44c8-9f08-9bde44fd9b34.png",
+        "image_alt": "Råvaror till parfym på mörk skiffer: bärnsten, vaniljstänger och orrisrot",
+        "heading": "Lyxdoft. Utan lyxpåslag.",
+        "text": "Vi komponerar extraits de parfum med samma karaktär som världens mest hyllade dofter. 50 ml, 349 kronor. Tillverkad i norr.",
+        "link_label": "Läs vår historia",
+        "link": "shopify:\/\/pages\/om-oss"
+      }
+    },
+    "nova_finder": {
+      "type": "collage",
       "blocks": {
-        "r0": {
-          "type": "quote",
+        "tile_sommar": {
+          "type": "collection",
           "settings": {
-            "quote": "Pacifico håller hela arbetsdagen och får alltid komplimanger. Galet bra för priset.",
-            "author": "Elin H. · Verifierat köp"
+            "collection": "sommar",
+            "number_of_columns": 1,
+            "number_of_row": 2
           }
         },
-        "r1": {
-          "type": "quote",
+        "tile_signature": {
+          "type": "collection",
           "settings": {
-            "quote": "Oud Chaos är min nya signaturdoft. Djup, varm och otroligt vuxen.",
-            "author": "Marcus L. · Verifierat köp"
+            "collection": "signature",
+            "number_of_columns": 1,
+            "number_of_row": 1
           }
         },
-        "r2": {
-          "type": "quote",
+        "tile_vanilj": {
+          "type": "collection",
           "settings": {
-            "quote": "Beställde tre, betalade för två och leveransen kom på två dagar. Klockrent.",
-            "author": "Sara N. · Verifierat köp"
+            "collection": "vanilj",
+            "number_of_columns": 1,
+            "number_of_row": 1
           }
         }
       },
-      "block_order": [
-        "r0",
-        "r1",
-        "r2"
-      ],
-      "settings": {}
+      "block_order": ["tile_sommar", "tile_signature", "tile_vanilj"],
+      "settings": {
+        "heading": "Hitta din doft",
+        "heading_alignment": "left",
+        "max_columns": 2
+      }
+    },
+    "nova_spotlight": {
+      "type": "nova-spotlight",
+      "settings": {
+        "product": "ambre-royale",
+        "label": "Signaturen",
+        "top_label": "Topp",
+        "top_notes": "Bergamott, peppar",
+        "heart_label": "Hjärta",
+        "heart_notes": "Damascus-ros, orrissmör",
+        "base_label": "Bas",
+        "base_notes": "Amber, sandelträ, vanilj",
+        "cta_label": "Upptäck Ambre Royale",
+        "image_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3FNhDOTSt2KtPsYKUIj0STNcqCb/hf_20260702_224303_531b5e6e-cba4-427e-a592-9bebc17abd29.png",
+        "image_alt": "Ambre Royale extrait de parfum med rå bärnsten på mörk skiffer"
+      }
+    },
+    "nova_quote": {
+      "type": "nova-quote",
+      "settings": {
+        "quote": "En doft är den enda accessoar som stannar kvar i rummet efter att du har gått."
+      }
     },
     "nova_newsletter": {
-      "type": "nova-newsletter",
-      "settings": {}
+      "type": "newsletter",
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Först till nästa släpp."
+          }
+        },
+        "paragraph_1": {
+          "type": "paragraph",
+          "settings": {
+            "text": "Nyhetssläpp och förhandsvisningar. Ett mejl i månaden, inget annat."
+          }
+        },
+        "email_form_1": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": ["heading_1", "paragraph_1", "email_form_1"],
+      "settings": {
+        "background_color_light": "#1A211C",
+        "heading_light": "#EDEBE3",
+        "text_light": "#C7C9BF",
+        "button_light": "#E0A43C",
+        "button_text_light": "#171204",
+        "button_hover_light": "#C4851B",
+        "button_text_hover_light": "#171204",
+        "background_color_dark": "#1A211C",
+        "heading_dark": "#EDEBE3",
+        "text_dark": "#C7C9BF",
+        "button_dark": "#E0A43C",
+        "button_text_dark": "#171204",
+        "button_hover_dark": "#C4851B",
+        "button_text_hover_dark": "#171204"
+      }
     }
   },
   "order": [
-    "luxury_hero_main",
-    "nova_trust",
+    "nova_hero",
+    "nova_marquee",
     "nova_bestsellers",
-    "nova_split",
-    "nova_bundle",
-    "nova_scentfinder",
-    "nova_reviews",
+    "nova_editorial",
+    "nova_finder",
+    "nova_spotlight",
+    "nova_quote",
     "nova_newsletter"
   ]
 }

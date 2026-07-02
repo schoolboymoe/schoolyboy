@@ -1,0 +1,51 @@
+{%- comment -%}
+  NOVA marquee: one slow scent-note strip. Serif, every other word italic.
+  The only marquee on the page.
+{%- endcomment -%}
+
+<div class="nova-marquee" aria-hidden="true">
+  <div class="nova-marquee__track">
+    {%- for i in (1..2) -%}
+      <div class="nova-marquee__seq">
+        {%- for block in section.blocks -%}
+          <span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NOVA Marquee",
+  "tag": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "word",
+      "name": "Word",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Word",
+          "default": "Bärnsten"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOVA Marquee",
+      "blocks": [
+        { "type": "word", "settings": { "text": "Bärnsten" } },
+        { "type": "word", "settings": { "text": "Rök" } },
+        { "type": "word", "settings": { "text": "Vanilj" } },
+        { "type": "word", "settings": { "text": "Oud" } },
+        { "type": "word", "settings": { "text": "Bergamott" } },
+        { "type": "word", "settings": { "text": "Vetiver" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

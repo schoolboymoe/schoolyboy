@@ -85,26 +85,23 @@
     {% # theme-check-disable AssetPreload %}
     <link rel="preload" href="{{ settings.type_body_font | font_url }}" as="font" type="font/woff2" crossorigin="anonymous" />
     {% # theme-check-enable AssetPreload %}
-    {% liquid 
+    {% liquid
       render 'meta-tags'
       render 'font-face'
       render 'css-variables'
       render 'theme-mode-control'
     %}
+    {% # NOVA nocturne brand layer: self-hosted fonts + token overrides. Loaded after css-variables so its :root wins. %}
+    {% # theme-check-disable AssetPreload %}
+    <link rel="preload" href="{{ 'nova-serif.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="{{ 'nova-sans.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin="anonymous" />
+    {% # theme-check-enable AssetPreload %}
+    {{ 'nova-brand.css' | asset_url | stylesheet_tag: preload: true }}
     {% if request.page_type == 'policy' %}
       {{ 'page.css' | asset_url | stylesheet_tag: preload: true }}
     {% endif %}
     {{ content_for_header }}
     {{ settings.additional_head }}
-
-    {%- comment -%} Nova Scents luxury polish layer, loaded last so it overrides theme.css {%- endcomment -%}
-    {{ 'custom.css' | asset_url | stylesheet_tag }}
-
-    {%- comment -%} Nova homepage design system + prototype fonts (Cormorant Garamond + Jost) {%- endcomment -%}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-    {{ 'nova.css' | asset_url | stylesheet_tag }}
 
     {% liquid
       assign menu_font_400 = settings.type_menu_font | font_modify: 'weight', '400'
@@ -268,13 +265,25 @@
         <script src="{{ 'cart-countdown-timer.js' | asset_url }}" defer></script>
       {%- endif -%}
       <script src="{{ 'theme.js' | asset_url }}" defer></script>
-      <script src="{{ 'custom.js' | asset_url }}" defer></script>
       <script src="{{ 'vendors.js' | asset_url }}" defer></script>
       <script src="{{ 'variant-select-card.js' | asset_url }}" defer></script>
       <script>
         window.addEventListener("load", (event) => {
           deferScriptLoad('instant.page', '{{ 'instant.page.v5.1.1.js' | asset_url }}', () => {}, true);
         });
+      </script>
+      <script>
+        // NOVA: reveal-on-scroll for .nova-io elements (no-op under reduced motion; CSS keeps them visible)
+        (function () {
+          var els = document.querySelectorAll('.nova-io');
+          if (!els.length || !('IntersectionObserver' in window)) return;
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+            });
+          }, { threshold: 0.18 });
+          els.forEach(function (el) { io.observe(el); });
+        })();
       </script>
     </div>
   </body>

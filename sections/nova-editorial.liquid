@@ -1,0 +1,81 @@
+{%- comment -%}
+  NOVA editorial split: image beside a short story block.
+  Image priority: picker > external URL > ink surface.
+{%- endcomment -%}
+
+<section class="nova-editorial">
+  <div class="nova-editorial__wrap">
+    <div class="nova-editorial__media nova-io"{% if section.settings.image == blank and section.settings.image_url == blank %} aria-hidden="true"{% endif %}>
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'lazy', alt: section.settings.image_alt | escape, sizes: '(max-width: 767px) 100vw, 45vw', widths: '600, 900, 1200, 1400' }}
+      {%- elsif section.settings.image_url != blank -%}
+        <img src="{{ section.settings.image_url }}" alt="{{ section.settings.image_alt | escape }}" loading="lazy">
+      {%- endif -%}
+    </div>
+    <div class="nova-io">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="nova-editorial__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="nova-editorial__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+      {%- if section.settings.link_label != blank -%}
+        <a class="nova-text-link" href="{{ section.settings.link | default: '/pages/om-oss' }}">{{ section.settings.link_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "NOVA Editorial",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "image_url",
+      "label": "Fallback image URL",
+      "info": "Used when no image is picked. Replace with an uploaded image for production."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text",
+      "default": "Råvaror till parfym på mörk skiffer"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Lyxdoft. Utan lyxpåslag."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Vi komponerar extraits de parfum med samma karaktär som världens mest hyllade dofter. 50 ml, 349 kronor. Tillverkad i norr."
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "Läs vår historia"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOVA Editorial"
+    }
+  ]
+}
+{% endschema %}

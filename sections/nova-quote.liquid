@@ -1,0 +1,40 @@
+{%- comment -%}
+  NOVA quote: one large italic statement, centered. Manifesto, not testimonial.
+{%- endcomment -%}
+
+<section class="nova-quote">
+  <div class="nova-quote__wrap nova-io">
+    {%- if section.settings.quote != blank -%}
+      <blockquote>&ldquo;{{ section.settings.quote }}&rdquo;</blockquote>
+    {%- endif -%}
+    {%- if section.settings.attribution != blank -%}
+      <cite>{{ section.settings.attribution }}</cite>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "NOVA Quote",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "En doft är den enda accessoar som stannar kvar i rummet efter att du har gått."
+    },
+    {
+      "type": "text",
+      "id": "attribution",
+      "label": "Attribution",
+      "info": "Optional. Leave empty for a brand statement."
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOVA Quote"
+    }
+  ]
+}
+{% endschema %}

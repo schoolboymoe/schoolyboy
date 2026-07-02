@@ -1,0 +1,142 @@
+{
+  "sections": {
+    "luxury_hero_main": {
+      "type": "luxury-hero",
+      "settings": {
+        "bottle_collection": "all",
+        "show_shader": true,
+        "shader_opacity": 55,
+        "eyebrow": "Inspirerad av ikonerna",
+        "heading": "NOVA",
+        "subline": "Extrait de Parfum · Made in the North",
+        "line": "Lyxen i doften. Inte i priset.",
+        "button_label": "Handla parfymer",
+        "button_link": "shopify://collections/all",
+        "button_label_2": "Hitta din doft",
+        "button_link_2": "",
+        "height": "full"
+      }
+    },
+    "nova_trust": {
+      "type": "nova-trust",
+      "settings": {}
+    },
+    "nova_bestsellers": {
+      "type": "nova-bestsellers",
+      "settings": {
+        "collection": "all",
+        "count": 4,
+        "button_link": "shopify://collections/all"
+      }
+    },
+    "nova_split": {
+      "type": "nova-split",
+      "settings": {}
+    },
+    "nova_bundle": {
+      "type": "nova-bundle",
+      "settings": {
+        "button_link": "shopify://collections/all"
+      }
+    },
+    "nova_scentfinder": {
+      "type": "nova-scentfinder",
+      "blocks": {
+        "t0": {
+          "type": "tile",
+          "settings": {
+            "label": "Kväll",
+            "title": "Oud & Läder",
+            "link": "shopify://collections/all"
+          }
+        },
+        "t1": {
+          "type": "tile",
+          "settings": {
+            "label": "Sensuell",
+            "title": "Söt & Vanilj",
+            "link": "shopify://collections/all"
+          }
+        },
+        "t2": {
+          "type": "tile",
+          "settings": {
+            "label": "Frisk",
+            "title": "Citrus & Hav",
+            "link": "shopify://collections/all"
+          }
+        },
+        "t3": {
+          "type": "tile",
+          "settings": {
+            "label": "Vardag",
+            "title": "Aromatisk",
+            "link": "shopify://collections/all"
+          }
+        },
+        "t4": {
+          "type": "tile",
+          "settings": {
+            "label": "Värme",
+            "title": "Ambra & Krydda",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "t0",
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "settings": {}
+    },
+    "nova_reviews": {
+      "type": "nova-reviews",
+      "blocks": {
+        "r0": {
+          "type": "quote",
+          "settings": {
+            "quote": "Pacifico håller hela arbetsdagen och får alltid komplimanger. Galet bra för priset.",
+            "author": "Elin H. · Verifierat köp"
+          }
+        },
+        "r1": {
+          "type": "quote",
+          "settings": {
+            "quote": "Oud Chaos är min nya signaturdoft. Djup, varm och otroligt vuxen.",
+            "author": "Marcus L. · Verifierat köp"
+          }
+        },
+        "r2": {
+          "type": "quote",
+          "settings": {
+            "quote": "Beställde tre, betalade för två och leveransen kom på två dagar. Klockrent.",
+            "author": "Sara N. · Verifierat köp"
+          }
+        }
+      },
+      "block_order": [
+        "r0",
+        "r1",
+        "r2"
+      ],
+      "settings": {}
+    },
+    "nova_newsletter": {
+      "type": "nova-newsletter",
+      "settings": {}
+    }
+  },
+  "order": [
+    "luxury_hero_main",
+    "nova_trust",
+    "nova_bestsellers",
+    "nova_split",
+    "nova_bundle",
+    "nova_scentfinder",
+    "nova_reviews",
+    "nova_newsletter"
+  ]
+}
