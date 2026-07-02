@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.header.name",
   "type": "header",
@@ -305,8 +314,7 @@
         "mobile_height": "500px",
         "padding_top_mobile": 8,
         "padding_bottom_mobile": 8
-      },
-      "disabled": true
+      }
     },
     "header": {
       "type": "header",
@@ -1220,12 +1228,88 @@
         "menu_label_another_icon": "",
         "menu_label_custom_icon": ""
       }
+    },
+    "nova_quote_NFcrfx": {
+      "type": "nova-quote",
+      "disabled": true,
+      "name": "NOVA Quote",
+      "settings": {
+        "quote": "En doft är den enda accessoar som stannar kvar i rummet efter att du har gått.",
+        "attribution": ""
+      }
+    },
+    "nova_marquee_qXQHdH": {
+      "type": "nova-marquee",
+      "blocks": {
+        "word_FEz4gM": {
+          "type": "word",
+          "settings": {
+            "text": "Bärnsten"
+          }
+        },
+        "word_MLPNG6": {
+          "type": "word",
+          "settings": {
+            "text": "Rök"
+          }
+        },
+        "word_CX3M4z": {
+          "type": "word",
+          "settings": {
+            "text": "Vanilj"
+          }
+        },
+        "word_JcptmE": {
+          "type": "word",
+          "settings": {
+            "text": "Oud"
+          }
+        },
+        "word_4qKadE": {
+          "type": "word",
+          "settings": {
+            "text": "Bergamott"
+          }
+        },
+        "word_4gF3WQ": {
+          "type": "word",
+          "settings": {
+            "text": "Vetiver"
+          }
+        }
+      },
+      "block_order": [
+        "word_FEz4gM",
+        "word_MLPNG6",
+        "word_CX3M4z",
+        "word_JcptmE",
+        "word_4qKadE",
+        "word_4gF3WQ"
+      ],
+      "disabled": true,
+      "name": "NOVA Marquee",
+      "settings": {}
+    },
+    "nova_newsletter_gAhKRA": {
+      "type": "nova-newsletter",
+      "disabled": true,
+      "name": "Nova newsletter",
+      "settings": {
+        "heading": "Bli först med nya släpp",
+        "body": "Få 10 procent på din första order och tidig tillgång till begränsade dofter.",
+        "placeholder": "Din e-postadress",
+        "button_label": "Gå med",
+        "success": "Tack! Kolla din inkorg för rabattkoden."
+      }
     }
   },
   "order": [
     "announcement-bar",
     "scrolling_banner_p9eXUt",
     "header",
-    "mobile-navigation"
+    "mobile-navigation",
+    "nova_quote_NFcrfx",
+    "nova_marquee_qXQHdH",
+    "nova_newsletter_gAhKRA"
   ]
 }

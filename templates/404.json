@@ -1,11 +1,109 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "main-404",
-      "settings": {}
+      "settings": {
+        "heading": "",
+        "heading_size": 70,
+        "text": ""
+      }
+    },
+    "luxury_hero_dmingq": {
+      "type": "luxury-hero",
+      "name": "Luxury hero",
+      "settings": {
+        "bottle_collection": "",
+        "show_shader": true,
+        "shader_opacity": 55,
+        "eyebrow": "Inspirerad av ikonerna",
+        "heading": "NOVA",
+        "subline": "Extrait de Parfum · Made in the North",
+        "line": "Lyxen i doften. Inte i priset.",
+        "button_label": "Handla parfymer",
+        "button_link": "",
+        "button_label_2": "Hitta din doft",
+        "button_link_2": "",
+        "height": "full"
+      }
+    },
+    "comparison_table_NUNJqH": {
+      "type": "comparison-table",
+      "blocks": {
+        "criterion_Rnmq68": {
+          "type": "criterion",
+          "settings": {
+            "heading": "Criterion label",
+            "criterion_detail_product": "Yes",
+            "criterion_detail_externals": "No\nNo\nNo\nNo"
+          }
+        },
+        "criterion_Gw7RBh": {
+          "type": "criterion",
+          "settings": {
+            "heading": "Criterion label",
+            "criterion_detail_product": "Yes",
+            "criterion_detail_externals": "No\nNo\nNo\nNo"
+          }
+        },
+        "criterion_FmkMjN": {
+          "type": "criterion",
+          "settings": {
+            "heading": "Criterion label",
+            "criterion_detail_product": "Yes",
+            "criterion_detail_externals": "No\nNo\nNo\nNo"
+          }
+        }
+      },
+      "block_order": [
+        "criterion_Rnmq68",
+        "criterion_Gw7RBh",
+        "criterion_FmkMjN"
+      ],
+      "name": "t:sections.comparision-table.name",
+      "settings": {
+        "heading": "Us vs Them",
+        "highlight_type": "underline",
+        "heading_size": 100,
+        "heading_tag": "h2",
+        "heading_alignment": "center",
+        "description": "<p>Add further details to describe your comparison table</p>",
+        "product": "",
+        "alternative_text": "",
+        "external_item_labels": "First item\nSecond item\nThird item\nFourth item",
+        "background_color_light": "rgba(0,0,0,0)",
+        "heading_light": "rgba(0,0,0,0)",
+        "color_heading_highlight_light": "rgba(0,0,0,0)",
+        "text_light": "rgba(0,0,0,0)",
+        "column_highlight_light": "rgba(0,0,0,0)",
+        "line_border": "rgba(0,0,0,0)",
+        "background_color_dark": "rgba(0,0,0,0)",
+        "heading_dark": "rgba(0,0,0,0)",
+        "color_heading_highlight_dark": "rgba(0,0,0,0)",
+        "text_dark": "rgba(0,0,0,0)",
+        "column_highlight_dark": "rgba(0,0,0,0)",
+        "line_border_dark": "rgba(0,0,0,0)",
+        "full_width": false,
+        "show_section_divider": false,
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "show_section_divider_mobile": false,
+        "padding_top_mobile": 28,
+        "padding_bottom_mobile": 28
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "luxury_hero_dmingq",
+    "comparison_table_NUNJqH"
   ]
 }
