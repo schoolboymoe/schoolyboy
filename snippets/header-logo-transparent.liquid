@@ -92,7 +92,18 @@
         />
       </span>
     {%- else -%}
-      <span class="hidden dark:block h-0 dark:h-auto mx-auto{% if logo_above %} md:mx-auto{% else %} md:ml-0{% endif %}">{{ shop.name }}</span>
+      {%- comment -%} NOVA: repo-bundled logo fallback until one is picked in the editor {%- endcomment -%}
+      <img
+        src="{{ 'nova-logo.png' | asset_url }}"
+        alt="{{ shop.name | escape }}"
+        width="316"
+        height="124"
+        style="width: {{ section.settings.logo_width }}px; height: auto;"
+        class="header-logo hidden absolute dark:block dark:relative mx-auto{% if logo_above %} md:mx-auto{% else %} md:ml-0{% endif %}"
+        loading="eager"
+        fetchpriority="high"
+        decoding="sync"
+      />
     {%- endif -%}
     {%- if section.settings.logo != blank -%}
       <span x-html="logo_src">
@@ -118,7 +129,18 @@
         />
       </span>
     {%- else -%}
-      <span class="block dark:hidden dark:max-h-0 mx-auto{% if logo_above %} md:mx-auto{% else %} md:ml-0{% endif %}">{{ shop.name }}</span>
+      {%- comment -%} NOVA: repo-bundled logo fallback until one is picked in the editor {%- endcomment -%}
+      <img
+        src="{{ 'nova-logo.png' | asset_url }}"
+        alt="{{ shop.name | escape }}"
+        width="316"
+        height="124"
+        style="width: {{ section.settings.logo_width }}px; height: auto;"
+        class="header-logo block dark:hidden dark:absolute mx-auto{% if logo_above %} md:mx-auto{% else %} md:ml-0{% endif %}"
+        loading="eager"
+        fetchpriority="high"
+        decoding="sync"
+      />
     {%- endif -%}
   </a>
 </div>
